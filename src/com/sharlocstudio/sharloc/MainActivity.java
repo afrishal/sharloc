@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 		// set up the drawer's list view with items and click listener
 		drawerListView.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, drawerMenuArray));
-		drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+		//--drawerListView.setOnItemClickListener(new DrawerItemClickListener());
 		
 		sharlocBarDrawerToggle = new ActionBarDrawerToggle(
 				this,
