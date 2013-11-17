@@ -1,18 +1,25 @@
 package com.sharlocstudio.sharloc;
 
+import java.util.Locale;
+
+import com.sharlocstudio.sharloc.fragments.*;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	private DrawerLayout sharlocDrawer; //
+	private DrawerLayout sharlocDrawerLayout; //
 	private ListView drawerListView;
 	private ActionBarDrawerToggle sharlocBarDrawerToggle; //
 	
@@ -25,19 +32,25 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		barTitle = barDrawerTitle = getTitle();
+		//atur nama action bar pertama kali jadi langsung "home"
+		getActionBar().setTitle(getResources().getString(R.string.app_open_bar_title));
+		
+		//Ambil resources dari folder res
 		drawerMenuArray = getResources().getStringArray(R.array.drawer_array);
-		sharlocDrawer = (DrawerLayout) findViewById(R.id.drawer_layout); //
+		sharlocDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout); //
 		drawerListView = (ListView) findViewById(R.id.navigation_drawer);//
+		
+		//Prepare title for action bar
+		barTitle = barDrawerTitle = getTitle();
 		
 		// set up the drawer's list view with items and click listener
 		drawerListView.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, drawerMenuArray));
-		//--drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+		drawerListView.setOnItemClickListener(new DrawerItemClickListener());
 		
 		sharlocBarDrawerToggle = new ActionBarDrawerToggle(
 				this,
-				sharlocDrawer,
+				sharlocDrawerLayout,
 				R.drawable.ic_navigation_drawer,
 				R.string.drawer_open,
 				R.string.drawer_close
@@ -45,19 +58,25 @@ public class MainActivity extends Activity {
 			
 			public void onDrawerClosed(View view){
 				getActionBar().setTitle(barTitle);
+				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 			
 			public void onDrawerOpened(View view){
 				getActionBar().setTitle(barDrawerTitle);
+				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 			
 		};
 		
 		// Set the drawer toggle as the DrawerListener
-        sharlocDrawer.setDrawerListener(sharlocBarDrawerToggle);
+        sharlocDrawerLayout.setDrawerListener(sharlocBarDrawerToggle);
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+        
+        if (savedInstanceState == null){
+        	selectItem(0);
+        }
 		
 	}
 
@@ -89,10 +108,74 @@ public class MainActivity extends Activity {
         if (sharlocBarDrawerToggle.onOptionsItemSelected(item)) {
         	return true;
         }
-        // Handle your other action bar items...
-
+        
+        // Handle action buttons
+        
         return super.onOptionsItemSelected(item);
     }
-	
+    
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			selectItem(position);			
+		}
+    	
+    }
+    
+    //*****************************************************
+    //switch fragment mana yang mau ditaro di content_frame
+    //*****************************************************
+    private void selectItem(int position){
+    	//Create a new fragment and specify the page to be show based on position
+    	Fragment homeFragment = new HomeFragment();
+    	Fragment profileFragment = new ProfileFragment();
+    	Fragment nearMeFragment = new NearMeFragment();
+    	Fragment friendsFragment = new FriendsFragment();
+    	
+    	FragmentManager fragmentManager = getFragmentManager();
+    	
+    	switch(position){
+    	case 0:
+    		//commit2 fragmentManager-nya
+    		fragmentManager.beginTransaction().replace(R.id.content_frame, homeFragment).commit();
+    		drawerListView.setItemChecked(position, true);
+    		setTitle(drawerMenuArray[position]);
+    		sharlocDrawerLayout.closeDrawer(drawerListView);
+    		break;
+    	case 1:
+    		fragmentManager.beginTransaction().replace(R.id.content_frame, nearMeFragment).commit();
+    		drawerListView.setItemChecked(position, true);
+    		setTitle(drawerMenuArray[position]);
+    		sharlocDrawerLayout.closeDrawer(drawerListView);
+    		break;
+    	case 2:
+    		fragmentManager.beginTransaction().replace(R.id.content_frame, friendsFragment).commit();
+    		drawerListView.setItemChecked(position, true);
+    		setTitle(drawerMenuArray[position]);
+    		sharlocDrawerLayout.closeDrawer(drawerListView);
+    		break;
+    	case 3:
+    		fragmentManager.beginTransaction().replace(R.id.content_frame, profileFragment).commit();
+    		drawerListView.setItemChecked(position, true);
+    		setTitle(drawerMenuArray[position]);
+    		sharlocDrawerLayout.closeDrawer(drawerListView);
+    		break;
+    	}
+    	
+    }
+    
+    @Override
+    public void setTitle(CharSequence title){
+    	barTitle = title;
+    	getActionBar().setTitle(barTitle);
+    }
+    
+    
+    
+    
+    
 
 }
