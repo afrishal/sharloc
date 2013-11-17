@@ -25,4 +25,5 @@
     android:fontFamily="sans-serif-light"
     android:textColor="#585858"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    />
