@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- daftar warna yang dipakai goes here -->
+<resources>
+    <color name="sharloc_theme">#007EA9</color>
+    <color name="sharloc_background_login">#EEECE1</color>
+    <color name="sharloc_background_activity">#E1E7E7</color>
+    <color name="sharloc_selector">#F0F0F0</color>
+</resources>
