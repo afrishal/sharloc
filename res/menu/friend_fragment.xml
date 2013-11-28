@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	
+    <!-- Should appear as action button -->
+    <item android:id="@+id/action_add_friend"
+          android:icon="@drawable/ic_action_social_add_person"
+          android:title="@string/action_add_friend"
+          android:showAsAction="ifRoom" />
+
+</menu>

@@ -1,15 +1,13 @@
 package com.sharlocstudio.sharloc;
 
-import java.util.Locale;
-
 import com.sharlocstudio.sharloc.fragments.*;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	private DrawerLayout sharlocDrawerLayout; //
 	private ListView drawerListView;
 	private ActionBarDrawerToggle sharlocBarDrawerToggle; //
@@ -79,6 +77,24 @@ public class MainActivity extends Activity {
         }
 		
 	}
+	
+	/* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = sharlocDrawerLayout.isDrawerOpen(drawerListView);        
+        if (drawerOpen) {
+        	//karna si action_add_friend itu punya si friend fragment, dan di halaman pertama aplikasi
+        	//belum pernah dimunculin, si menu.findItem(R.id.action_add_friend akan return null, makanya
+        	//di bawah ini, cek apakah dia null atau enggak, kalau enggak, berarti kita lagi di halaman
+        	//friend fragment, tapi kalau iya, berarti di halaman lainnya
+        	if(menu.findItem(R.id.action_add_friend) != null){
+        		menu.findItem(R.id.action_add_friend).setVisible(false);
+        	}
+		}
+		return super.onPrepareOptionsMenu(menu);
+        
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,7 +135,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView parent, View view, int position,
 				long id) {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method 	stub
 			selectItem(position);			
 		}
     	

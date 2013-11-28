@@ -4,13 +4,18 @@ import java.util.ArrayList;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.view.CardListView;
+import it.gmariotti.cardslib.library.view.CardView;
+
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,6 +28,8 @@ public class FriendsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+		setHasOptionsMenu(true); //kasih tau kalo fragmen ini punya options menu sendiri
+
 		
 		return rootView;
 	}
@@ -32,6 +39,12 @@ public class FriendsFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		initCards();
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	    inflater.inflate(R.menu.friend_fragment, menu);
+	    super.onCreateOptionsMenu(menu,inflater);
 	}
 	
 	public void initCards(){
@@ -55,13 +68,13 @@ public class FriendsFragment extends Fragment {
 		
 		
 		//card nomor 2
-		//Card card2 = new Card(getActivity().getApplicationContext());
-		//CardHeader card2Header = new CardHeader(getActivity().getApplicationContext());
-		//card2Header.setTitle("Yehezkiel Chrisby Gulo");
-		//card2.addCardHeader(card2Header);
+		/*Card card2 = new Card(getActivity().getApplicationContext());
+		CardHeader card2Header = new CardHeader(getActivity().getApplicationContext());
+		card2Header.setTitle("Yehezkiel Chrisby Gulo");
+		card2.addCardHeader(card2Header);
 		
-		//CardView card2View = (CardView) getActivity().findViewById(R.id.carddemo2);
-		//card2View.setCard(card2);
+		CardView card2View = (CardView) getActivity().findViewById(R.id.carddemo2);
+		card2View.setCard(card2);*/
 		
 		ArrayList<Card> friendCards = new ArrayList<Card>();
 		
@@ -92,7 +105,7 @@ public class FriendsFragment extends Fragment {
 		CardArrayAdapter friendCardArrayAdapter = new CardArrayAdapter(getActivity(),friendCards);
 		friendCardArrayAdapter.setInnerViewTypeCount(1);
 		
-		CardListView friendCardListView = (CardListView) getActivity().findViewById(R.id.card_list_friends);
+		CardListView friendCardListView = (CardListView) getActivity().findViewById(R.id.friends_fragment_card_list_friends);
 		if(friendCardListView != null){
 			friendCardListView.setAdapter(friendCardArrayAdapter);
 		}

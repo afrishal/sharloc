@@ -58,8 +58,5 @@ public class FriendCard extends Card{
 		//Card cannot be swiped
 		setSwipeable(false);
 	}
-	
-	
-	
 
 }
