@@ -3,10 +3,22 @@
 
     <!-- Dummy String -->
     <string name="yolo">YOLO!</string>
+    <string name="hello_world">Hello world!</string>
 
     <!-- String for app settings -->
     <string name="app_name">Sharloc</string>
     <string name="app_open_bar_title">Home</string>
+    <string name="title_activity_nfc">NFC</string>
+    <string name="title_activity_qrcode">Barcode Scanner</string>
+    <string name="title_activity_register">Create an account</string>
+    
+    <!-- String for registration page -->
+    <string name="registration_msg_failed">Can\'t create an account</string>
+    <string name="registration_name_label">Name</string>
+    <string name="registration_email_label">E-mail</string>
+    <string name="registration_password_label">Password</string>
+    <string name="registration_password_reenter_label">Re-enter password</string>
+    <string name="registration_button_label">Sign Up</string>
 
     <!-- Strings for action menu -->
     <string name="action_settings">Settings</string>
@@ -21,13 +33,19 @@
     <string name="button_broadcast_location">Broadcast Location</string>
     <string name="action_add_friend">Add Friend</string>
     <string name="action_edit_profile">Edit Profile</string>
+    <string name="accountDummy1">Yehezkiel Chrisby Gulo</string>
+    <string name="emailDummy1">yehezkiel.chrisby@gmail.com</string>
 
     <!-- Strings for friend fragment -->
     <string name="contact_request_location">Request Location</string>
     <string name="contact_delete">Delete Contact</string>
     <string name="contact_add_method_qr_code">Add using Barcode Scanner</string>
     <string name="contact_add_method_nfc">Add using NFC</string>
+    <string name="qr_code_description">Scan your friend\'s QR Code</string>
     <string name="nfc_description">Align the back of your current devices. Make sure both devices have turned the NFC on.</string>
+
+    <!-- Strings for profile fragment -->
+    <string name="profile_qrcode_label">QR Code</string>
 
     <!-- Strings for buttons login page -->
     <string name="button_sign_in">Sign In</string>
@@ -43,7 +61,6 @@
         <item>My Profile</item>
     </string-array>
 
-    <string name="title_activity_nfc">NFCActivity</string>
-    <string name="hello_world">Hello world!</string>
+    
 
 </resources>

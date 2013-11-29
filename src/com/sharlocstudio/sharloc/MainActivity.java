@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.sharlocstudio.sharloc.activities.NFCActivity;
+import com.sharlocstudio.sharloc.activities.QRCodeActivity;
 import com.sharlocstudio.sharloc.fragments.*;
 
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence barDrawerTitle;
 	private CharSequence barTitle;
 	private String[] drawerMenuArray;
+	private Intent intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +145,8 @@ public class MainActivity extends FragmentActivity {
         switch(item.getItemId()) {
         case R.id.action_settings:
         	Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
+        	intent = new Intent(MainActivity.this, RegistrationActivity.class);
+    		startActivity(intent);
         	break;
         case R.id.action_add_friend:
         	//Toast.makeText(this, "Add Friend", Toast.LENGTH_LONG).show();
@@ -177,17 +181,20 @@ public class MainActivity extends FragmentActivity {
     	
     	builder.setTitle("Choose method").setAdapter(meths, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+            	//Intent intent;
                 // The 'which' argument contains the index position
                 // of the selected item
             	switch (which) {
             	case 0:
-            		Toast.makeText(MainActivity.this, "QR Code!", Toast.LENGTH_LONG).show();
+            		//Toast.makeText(MainActivity.this, "QR Code!", Toast.LENGTH_LONG).show();
             		// flow add temen pake qr code masukin di sini
+            		intent = new Intent(MainActivity.this, QRCodeActivity.class);
+            		startActivity(intent);
             		break;
             	case 1:
-            		Toast.makeText(MainActivity.this, "NFC!", Toast.LENGTH_LONG).show();
+            		//Toast.makeText(MainActivity.this, "NFC!", Toast.LENGTH_LONG).show();
             		// flow add temen pake nfc masukin di sini
-            		Intent intent = new Intent(MainActivity.this, NFCActivity.class);
+            		intent = new Intent(MainActivity.this, NFCActivity.class);
             		startActivity(intent);
             		break;
             		

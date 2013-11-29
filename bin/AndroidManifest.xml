@@ -16,23 +16,31 @@
         android:theme="@style/Theme.SharlocAppTheme" >
         <activity
             android:name="com.sharlocstudio.sharloc.MainActivity"
-            android:configChanges="orientation"
             android:label="@string/app_name"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sharlocstudio.sharloc.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:name="com.sharlocstudio.sharloc.activities.NFCActivity"
+            android:label="@string/title_activity_nfc"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sharlocstudio.sharloc.activities.NFCActivity"
-            android:label="@string/title_activity_nfc" >
+            android:name="com.sharlocstudio.sharloc.activities.QRCodeActivity"
+            android:label="@string/title_activity_qrcode"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sharlocstudio.sharloc.RegistrationActivity"
+            android:label="@string/title_activity_register"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
