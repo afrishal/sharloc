@@ -3,6 +3,7 @@ package com.sharlocstudio.sharloc;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.sharlocstudio.sharloc.activities.NFCActivity;
 import com.sharlocstudio.sharloc.fragments.*;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -185,6 +187,8 @@ public class MainActivity extends FragmentActivity {
             	case 1:
             		Toast.makeText(MainActivity.this, "NFC!", Toast.LENGTH_LONG).show();
             		// flow add temen pake nfc masukin di sini
+            		Intent intent = new Intent(MainActivity.this, NFCActivity.class);
+            		startActivity(intent);
             		break;
             		
             	}
@@ -205,7 +209,7 @@ public class MainActivity extends FragmentActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView parent, View view, int position,
+		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method 	stub
 			selectItem(position);			

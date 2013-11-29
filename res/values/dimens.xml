@@ -5,7 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="friend_card_height">60dp</dimen>
     <dimen name="logo_activity_login">100dp</dimen>
-    <dimen name="home_map_height">250dp</dimen>
+    <dimen name="home_map_height">350dp</dimen>
     <dimen name="home_location_data_height">150dp</dimen>
 
 </resources>
