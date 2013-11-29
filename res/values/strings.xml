@@ -22,11 +22,14 @@
     <string name="label_current_location">Current Location</string>
     <string name="button_broadcast_location">Broadcast Location</string>
     <string name="action_add_friend">Add Friend</string>
+    <string name="action_edit_profile">Edit Profile</string>
     
     
     <!-- Strings for friend fragment -->
     <string name="contact_request_location">Request Location</string>
     <string name="contact_delete">Delete Contact</string>
+    <string name="contact_add_method_qr_code">Add using Barcode Scanner</string>
+    <string name="contact_add_method_nfc">Add using NFC</string>
     
     
     <!-- Strings for buttons login page-->

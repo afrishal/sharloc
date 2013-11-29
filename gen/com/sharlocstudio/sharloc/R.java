@@ -143,38 +143,42 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int card_shadow=0x7f020004;
         public static final int card_undo=0x7f020005;
         public static final int ic_action_action_settings=0x7f020006;
-        public static final int ic_action_social_add_person=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int ic_logo=0x7f020009;
-        public static final int ic_menu_expand_card_dark_normal=0x7f02000a;
-        public static final int ic_menu_expand_card_dark_pressed=0x7f02000b;
-        public static final int ic_menu_overflow_card_dark_normal=0x7f02000c;
-        public static final int ic_menu_overflow_card_dark_pressed=0x7f02000d;
-        public static final int ic_navigation_drawer=0x7f02000e;
-        public static final int ic_undobar_undo=0x7f02000f;
-        public static final int logo_login=0x7f020010;
-        public static final int navdrawer_divider=0x7f020011;
-        public static final int navdrawer_selector_focused=0x7f020012;
-        public static final int navdrawer_selector_pressed=0x7f020013;
-        public static final int pressed_background_card=0x7f020014;
-        public static final int undobar=0x7f020015;
-        public static final int undobar_button_focused=0x7f020016;
-        public static final int undobar_button_pressed=0x7f020017;
-        public static final int undobar_divider=0x7f020018;
+        public static final int ic_action_content_edit=0x7f020007;
+        public static final int ic_action_social_add_person=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ic_logo=0x7f02000a;
+        public static final int ic_menu_expand_card_dark_normal=0x7f02000b;
+        public static final int ic_menu_expand_card_dark_pressed=0x7f02000c;
+        public static final int ic_menu_overflow_card_dark_normal=0x7f02000d;
+        public static final int ic_menu_overflow_card_dark_pressed=0x7f02000e;
+        public static final int ic_navigation_drawer=0x7f02000f;
+        public static final int ic_nfc=0x7f020010;
+        public static final int ic_qr_code=0x7f020011;
+        public static final int ic_undobar_undo=0x7f020012;
+        public static final int logo_login=0x7f020013;
+        public static final int navdrawer_divider=0x7f020014;
+        public static final int navdrawer_selector_focused=0x7f020015;
+        public static final int navdrawer_selector_pressed=0x7f020016;
+        public static final int pressed_background_card=0x7f020017;
+        public static final int undobar=0x7f020018;
+        public static final int undobar_button_focused=0x7f020019;
+        public static final int undobar_button_pressed=0x7f02001a;
+        public static final int undobar_divider=0x7f02001b;
     }
     public static final class id {
-        public static final int action_add_friend=0x7f0c0029;
-        public static final int action_forgot_password=0x7f0c002a;
-        public static final int action_settings=0x7f0c002b;
+        public static final int action_add_friend=0x7f0c002b;
+        public static final int action_edit_profile=0x7f0c002c;
+        public static final int action_forgot_password=0x7f0c002d;
+        public static final int action_settings=0x7f0c002e;
         public static final int card_content_expand_layout=0x7f0c0018;
-        public static final int card_current_location=0x7f0c0020;
-        public static final int card_expand_inner_simple_title=0x7f0c0023;
+        public static final int card_current_location=0x7f0c0022;
+        public static final int card_expand_inner_simple_title=0x7f0c0025;
         public static final int card_header_button_expand=0x7f0c000e;
         public static final int card_header_button_frame=0x7f0c000c;
         public static final int card_header_button_other=0x7f0c000f;
         public static final int card_header_button_overflow=0x7f0c000d;
         public static final int card_header_inner_frame=0x7f0c000b;
-        public static final int card_header_inner_simple_title=0x7f0c0024;
+        public static final int card_header_inner_simple_title=0x7f0c0026;
         public static final int card_header_layout=0x7f0c0017;
         public static final int card_main_content_layout=0x7f0c0012;
         public static final int card_main_inner_simple_title=0x7f0c0014;
@@ -184,28 +188,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int card_thumbnail_image=0x7f0c0011;
         public static final int card_thumbnail_layout=0x7f0c0019;
         public static final int content_frame=0x7f0c0009;
-        public static final int drawer_icon=0x7f0c001d;
+        public static final int drawer_icon=0x7f0c001f;
         public static final int drawer_layout=0x7f0c0008;
         public static final int email=0x7f0c0004;
-        public static final int friend_delete=0x7f0c002d;
-        public static final int friend_retrieve_location=0x7f0c002c;
-        public static final int friends_fragment_card_list_friends=0x7f0c001e;
-        public static final int home_broadcast_locataion=0x7f0c0021;
-        public static final int home_map=0x7f0c001f;
+        public static final int friend_delete=0x7f0c0030;
+        public static final int friend_retrieve_location=0x7f0c002f;
+        public static final int friends_fragment_card_list_friends=0x7f0c0020;
+        public static final int home_broadcast_locataion=0x7f0c0023;
+        public static final int home_map=0x7f0c0021;
         public static final int imageView1=0x7f0c0003;
-        public static final int list_cardId=0x7f0c0025;
-        public static final int list_card_undobar=0x7f0c0026;
-        public static final int list_card_undobar_button=0x7f0c0028;
-        public static final int list_card_undobar_message=0x7f0c0027;
+        public static final int list_cardId=0x7f0c0027;
+        public static final int list_card_undobar=0x7f0c0028;
+        public static final int list_card_undobar_button=0x7f0c002a;
+        public static final int list_card_undobar_message=0x7f0c0029;
         public static final int login=0x7f0c0006;
         public static final int login_form=0x7f0c0002;
         public static final int login_status=0x7f0c0000;
         public static final int login_status_message=0x7f0c0001;
         public static final int maps=0x7f0c0015;
+        public static final int method_icon=0x7f0c001d;
+        public static final int method_label=0x7f0c001e;
         public static final int navigation_drawer=0x7f0c000a;
         public static final int password=0x7f0c0005;
         public static final int sign_in_button=0x7f0c0007;
-        public static final int text=0x7f0c0022;
+        public static final int text=0x7f0c0024;
         public static final int undobar=0x7f0c001a;
         public static final int undobar_button=0x7f0c001c;
         public static final int undobar_message=0x7f0c001b;
@@ -225,24 +231,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int card_layout=0x7f030008;
         public static final int card_thumbnail_layout=0x7f030009;
         public static final int card_undo_layout=0x7f03000a;
-        public static final int drawer_list_item=0x7f03000b;
-        public static final int drawer_list_item_icon=0x7f03000c;
-        public static final int fragment_friends=0x7f03000d;
-        public static final int fragment_home=0x7f03000e;
-        public static final int fragment_nearme=0x7f03000f;
-        public static final int fragment_profile=0x7f030010;
-        public static final int inner_base_expand=0x7f030011;
-        public static final int inner_base_header=0x7f030012;
-        public static final int inner_base_main=0x7f030013;
-        public static final int list_card_layout=0x7f030014;
-        public static final int list_card_thumbnail_layout=0x7f030015;
-        public static final int list_card_undo_message=0x7f030016;
+        public static final int dialog_add_friend_method=0x7f03000b;
+        public static final int drawer_list_item=0x7f03000c;
+        public static final int drawer_list_item_icon=0x7f03000d;
+        public static final int fragment_friends=0x7f03000e;
+        public static final int fragment_home=0x7f03000f;
+        public static final int fragment_nearme=0x7f030010;
+        public static final int fragment_profile=0x7f030011;
+        public static final int inner_base_expand=0x7f030012;
+        public static final int inner_base_header=0x7f030013;
+        public static final int inner_base_main=0x7f030014;
+        public static final int list_card_layout=0x7f030015;
+        public static final int list_card_thumbnail_layout=0x7f030016;
+        public static final int list_card_undo_message=0x7f030017;
     }
     public static final class menu {
-        public static final int friend_fragment=0x7f0b0000;
-        public static final int login=0x7f0b0001;
-        public static final int main=0x7f0b0002;
-        public static final int menu_card_friend=0x7f0b0003;
+        public static final int fragment_friend=0x7f0b0000;
+        public static final int fragment_profile=0x7f0b0001;
+        public static final int login=0x7f0b0002;
+        public static final int main=0x7f0b0003;
+        public static final int menu_card_friend=0x7f0b0004;
     }
     public static final class plurals {
         /** <string name="undo_card">Card removed</string>
@@ -251,12 +259,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class string {
         public static final int action_add_friend=0x7f07000a;
-        public static final int action_forgot_password=0x7f070015;
+        public static final int action_edit_profile=0x7f07000b;
+        public static final int action_forgot_password=0x7f070018;
         /**  Strings for action menu 
          */
         public static final int action_settings=0x7f070004;
-        public static final int action_sign_in_register=0x7f070013;
-        public static final int action_sign_in_short=0x7f070014;
+        public static final int action_sign_in_register=0x7f070016;
+        public static final int action_sign_in_short=0x7f070017;
         /**  String for app settings 
          */
         public static final int app_name=0x7f070000;
@@ -264,19 +273,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button_broadcast_location=0x7f070009;
         /**  Strings for buttons login page
          */
-        public static final int button_sign_in=0x7f07000d;
-        public static final int contact_delete=0x7f07000c;
+        public static final int button_sign_in=0x7f070010;
+        public static final int contact_add_method_nfc=0x7f07000f;
+        public static final int contact_add_method_qr_code=0x7f07000e;
+        public static final int contact_delete=0x7f07000d;
         /**  Strings for friend fragment 
          */
-        public static final int contact_request_location=0x7f07000b;
-        public static final int drawer_close=0x7f07000f;
+        public static final int contact_request_location=0x7f07000c;
+        public static final int drawer_close=0x7f070012;
         /**   Strings for navigation drawer 
          */
-        public static final int drawer_open=0x7f07000e;
-        public static final int error_field_required=0x7f07001a;
-        public static final int error_incorrect_password=0x7f070019;
-        public static final int error_invalid_email=0x7f070017;
-        public static final int error_invalid_password=0x7f070018;
+        public static final int drawer_open=0x7f070011;
+        public static final int error_field_required=0x7f07001d;
+        public static final int error_incorrect_password=0x7f07001c;
+        public static final int error_invalid_email=0x7f07001a;
+        public static final int error_invalid_password=0x7f07001b;
         public static final int item_about=0x7f070006;
         /**  Strings for settings activity | KALO SETTINGS DIPENCET 
          */
@@ -288,12 +299,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Undo Controller
          */
         public static final int list_card_undo_title=0x7f070001;
-        public static final int login_progress_signing_in=0x7f070016;
+        public static final int login_progress_signing_in=0x7f070019;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f070011;
-        public static final int prompt_password=0x7f070012;
-        public static final int title_activity_login=0x7f070010;
+        public static final int prompt_email=0x7f070014;
+        public static final int prompt_password=0x7f070015;
+        public static final int title_activity_login=0x7f070013;
         /**  Dummy String 
          */
         public static final int yolo=0x7f070002;

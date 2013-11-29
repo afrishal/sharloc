@@ -1,10 +1,15 @@
 package com.sharlocstudio.sharloc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.sharlocstudio.sharloc.fragments.*;
 
 import android.os.Bundle;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +20,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 	private DrawerLayout sharlocDrawerLayout; //
@@ -91,6 +98,11 @@ public class MainActivity extends FragmentActivity {
         	if(menu.findItem(R.id.action_add_friend) != null){
         		menu.findItem(R.id.action_add_friend).setVisible(false);
         	}
+        	
+        	if(menu.findItem(R.id.action_edit_profile) != null){
+        		menu.findItem(R.id.action_edit_profile).setVisible(false);
+        	}
+        	
 		}
 		return super.onPrepareOptionsMenu(menu);
         
@@ -126,8 +138,68 @@ public class MainActivity extends FragmentActivity {
         }
         
         // Handle action buttons
+        switch(item.getItemId()) {
+        case R.id.action_settings:
+        	Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
+        	break;
+        case R.id.action_add_friend:
+        	//Toast.makeText(this, "Add Friend", Toast.LENGTH_LONG).show();
+        	createAddFriendDialog();
+        	break;
+        }
         
         return super.onOptionsItemSelected(item);
+    }
+    
+    private void createAddFriendDialog(){
+    	//Setting up the list
+    	ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
+    	HashMap<String, String> map;
+    	
+    	map = new HashMap<String, String>();
+    	map.put("method_label", getResources().getString(R.string.contact_add_method_qr_code));
+    	map.put("method_icon", String.valueOf(R.drawable.ic_qr_code));
+    	listItem.add(map);
+    	
+    	map = new HashMap<String, String>();
+    	map.put("method_label", getResources().getString(R.string.contact_add_method_nfc));
+    	map.put("method_icon", String.valueOf(R.drawable.ic_nfc));
+    	listItem.add(map);
+    	
+    	SimpleAdapter meths = new SimpleAdapter(this.getBaseContext(), listItem, R.layout.dialog_add_friend_method,
+    			new String[]{"method_icon", "method_label"}, new int[]{R.id.method_icon, R.id.method_label});
+    	
+    	
+    	//Setting up dialog box
+    	AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+    	
+    	builder.setTitle("Choose method").setAdapter(meths, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // The 'which' argument contains the index position
+                // of the selected item
+            	switch (which) {
+            	case 0:
+            		Toast.makeText(MainActivity.this, "QR Code!", Toast.LENGTH_LONG).show();
+            		// flow add temen pake qr code masukin di sini
+            		break;
+            	case 1:
+            		Toast.makeText(MainActivity.this, "NFC!", Toast.LENGTH_LONG).show();
+            		// flow add temen pake nfc masukin di sini
+            		break;
+            		
+            	}
+            }
+    	});
+    	
+    	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+    	
+    	AlertDialog dialog = builder.create();
+    	
+    	dialog.show();
     }
     
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
