@@ -42,13 +42,14 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingTop="10dp"
-        android:textSize="18sp"
         android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:text="@string/profile_qrcode_label" />
     
     <ImageView 
         android:id="@+id/profile_qr_code_image"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         />

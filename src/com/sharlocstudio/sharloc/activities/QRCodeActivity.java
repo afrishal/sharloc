@@ -1,12 +1,21 @@
 package com.sharlocstudio.sharloc.activities;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.R.layout;
 import com.sharlocstudio.sharloc.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 public class QRCodeActivity extends Activity {
 
