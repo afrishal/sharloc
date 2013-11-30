@@ -48,6 +48,9 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private LatLng myPosition = null;
 	SupportMapFragment sMapFragment;
 	List<Address> list;
+	private boolean gpsActive;
+	private Card card;
+	private CardView cardView;
 
 	public HomeFragment() {
 		// Empty constructor required for fragment subclasses
@@ -81,8 +84,8 @@ public class HomeFragment extends Fragment implements OnClickListener {
 
 		getMyLocation();
 
-		Button button = (Button) rootView.findViewById(
-				R.id.home_broadcast_location);
+		Button button = (Button) rootView
+				.findViewById(R.id.home_broadcast_location);
 		button.setOnClickListener((OnClickListener) this);
 
 		return rootView;
@@ -141,9 +144,10 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			myLong = location.getLongitude();
 
 			myPosition = new LatLng(myLat, myLong);
-			
+
 			googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
 					myPosition, 16.0f));
+
 		}
 	}
 
@@ -152,48 +156,61 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		super.onActivityCreated(savedInstanceState);
 
 		initCard();
+
 	}
 
 	public void initCard() {
 		// card nomor 1
 		// Card card = new
 		// Card(getActivity().getApplicationContext(),R.layout.card_friend);
-		Card card = new Card(getActivity().getApplicationContext());
+		card = new Card(getActivity().getApplicationContext());
 		CardHeader cardHeader = new CardHeader(getActivity()
 				.getApplicationContext());
 		cardHeader.setTitle(getResources().getString(
 				R.string.label_current_location));
 		card.addCardHeader(cardHeader);
-		card.setTitle(getAddress());
-		CardView cardView = (CardView) getActivity().findViewById(
+		card.setTitle("Waiting for current location..");
+		cardView = (CardView) getActivity().findViewById(
 				R.id.card_current_location);
 		cardView.setCard(card);
 	}
 
 	private String getAddress() {
-		Geocoder geo = new Geocoder(getActivity().getApplicationContext());
+		getMyLocation();
 
 		try {
+			Geocoder geo = new Geocoder(getActivity().getApplicationContext());
 			list = geo.getFromLocation(myLat, myLong, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list.get(0).getAddressLine(0) + ", " + list.get(0).getLocality()
-				+ ", " + list.get(0).getCountryName();
-	}
-	
-	@Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.home_broadcast_location:
-        	getMyLocation();
-        	Toast.makeText(getActivity().getApplicationContext(), "Your coordinates are: " +
-        myLat + ", " + myLong,
-        			Toast.LENGTH_SHORT).show();
-            
+		if (list.size() != 0) {
 
-            break;
-        }
-    }
+			return list.get(0).getAddressLine(0) + ", "
+					+ list.get(0).getLocality() + ", "
+					+ list.get(0).getCountryName();
+		}
+		return "Unable to get current location";
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.home_broadcast_location:
+			getMyLocation();
+			Toast.makeText(getActivity().getApplicationContext(),
+					"Your coordinates are: " + myLat + ", " + myLong,
+					Toast.LENGTH_SHORT).show();
+			
+
+			card.setTitle(getAddress());
+			cardView = (CardView) getActivity().findViewById(
+					R.id.card_current_location);
+			cardView.refreshCard(card);
+
+			break;
+		}
+	}
 }

@@ -2,21 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/sharloc_background_activity"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/sharloc_background_activity"
     tools:context=".QRCodeActivity" >
-    
-    <TextView 
+
+    <FrameLayout
         android:id="@+id/camera_viewfinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/qr_code_label"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@color/sharloc_selector"
-        />
+        android:background="@color/sharloc_selector" />
 
     <TextView
         android:id="@+id/qr_code_label"
@@ -27,5 +26,12 @@
         android:gravity="center"
         android:text="@string/qr_code_description"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/scanText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scanning..." >
+    </TextView>
 
 </RelativeLayout>
