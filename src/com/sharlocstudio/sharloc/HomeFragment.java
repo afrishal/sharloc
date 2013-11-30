@@ -16,6 +16,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.R.id;
 import com.sharlocstudio.sharloc.R.layout;
@@ -43,12 +44,11 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private MapView mMapView;
 	private GoogleMap googleMap;
 	private Bundle mBundle;
-	private double myLat = 0.0;
-	private double myLong = 0.0;
-	private LatLng myPosition = null;
+	private double myLat;
+	private double myLong;
+	private LatLng myPosition;
 	SupportMapFragment sMapFragment;
 	List<Address> list;
-	private boolean gpsActive;
 	private Card card;
 	private CardView cardView;
 
@@ -61,12 +61,6 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_home, container,
 				false);
-
-		// FragmentManager fragmentManager = getFragmentManager();
-		// fragmentManager.beginTransaction().replace(R.id.home_map_frame,
-		// homeFragment).commit();
-		// GoogleMap googleMap = ((MapFragment)
-		// getFragmentManager().findFragmentById(R.id.home_map_frame)).getMap();
 
 		try {
 			MapsInitializer.initialize(getActivity());
@@ -138,11 +132,11 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		Criteria criteria = new Criteria();
 		String provider = locationManager.getBestProvider(criteria, true);
 		Location location = locationManager.getLastKnownLocation(provider);
-
+		
 		if (location != null) {
 			myLat = location.getLatitude();
 			myLong = location.getLongitude();
-
+			
 			myPosition = new LatLng(myLat, myLong);
 
 			googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
