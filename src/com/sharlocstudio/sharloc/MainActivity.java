@@ -1,16 +1,20 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.sharlocstudio.sharloc.activities.NFCActivity;
 import com.sharlocstudio.sharloc.activities.QRCodeActivity;
-import com.sharlocstudio.sharloc.fragments.*;
+import com.sharlocstudio.sharloc.model.User;
 
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -43,6 +47,31 @@ public class MainActivity extends FragmentActivity {
 		
 		//atur nama action bar pertama kali jadi langsung "home"
 		getActionBar().setTitle(getResources().getString(R.string.app_open_bar_title));
+		
+		// create user profile
+		if (!User.isLoggedIn(getFilesDir() + "/user.xml")) {
+			Intent intent = getIntent();
+			String name = intent.getStringExtra("name");
+			String email = intent.getStringExtra("email");
+			String longitude = intent.getStringExtra("longitude");
+			String latitude = intent.getStringExtra("latitude");
+			String lastUpdate = intent.getStringExtra("lastUpdate");
+
+			User user = new User(email, name, latitude, longitude,
+					Timestamp.valueOf(lastUpdate));
+			try {
+				user.saveProfile(openFileOutput(User.FILE_NAME,
+						Context.MODE_PRIVATE));
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		//Ambil resources dari folder res
 		drawerMenuArray = getResources().getStringArray(R.array.drawer_array);

@@ -11,7 +11,7 @@
     <string name="title_activity_nfc">NFC</string>
     <string name="title_activity_qrcode">Barcode Scanner</string>
     <string name="title_activity_register">Create an account</string>
-    
+
     <!-- String for registration page -->
     <string name="registration_msg_failed">Can\'t create an account</string>
     <string name="registration_name_label">Name</string>
@@ -61,6 +61,10 @@
         <item>My Profile</item>
     </string-array>
 
-    
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_login_button_label">Login</string>
+    <string name="login_register_button_label">Create an Account</string>
 
 </resources>
