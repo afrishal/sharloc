@@ -14,7 +14,7 @@
         android:paddingTop="12dp"
         android:textSize="23sp"
         android:gravity="center"
-        android:text="@string/accountDummy1" />
+         />
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:textSize="16sp"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="@string/emailDummy1" />
+        />
     
     <TextView
         android:id="@+id/profile_separator"

@@ -1,8 +1,18 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.sharlocstudio.sharloc.R;
+import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.Contents;
 import com.sharlocstudio.sharloc.support.QRCodeEncoder;
 
@@ -18,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ProfileFragment extends Fragment {
 	public ProfileFragment() {
@@ -29,7 +40,21 @@ public class ProfileFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 		setHasOptionsMenu(true); //kasih tau kalo fragmen ini punya options menu sendiri
 		
-		String qrInputText = getResources().getString(R.string.emailDummy1);
+		// Get user profile
+		User user = null;
+		try {
+			user = getUserProfile();
+		} catch (XmlPullParserException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		TextView uName = (TextView) rootView.findViewById(R.id.profile_name);
+		TextView uEmail = (TextView) rootView.findViewById(R.id.profile_email);
+		uName.setText(user.getName());
+		uEmail.setText(user.getEmail());
+		String qrInputText = user.getEmail();
 		
 				  
 		//Find screen size
@@ -67,6 +92,17 @@ public class ProfileFragment extends Fragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 	    inflater.inflate(R.menu.fragment_profile, menu);
 	    super.onCreateOptionsMenu(menu,inflater);
+	}
+	
+	public User getUserProfile() throws XmlPullParserException, IOException {
+		InputStream is = null;
+		try {
+			is = new BufferedInputStream(new FileInputStream(new File(
+					getActivity().getFilesDir() + "/user.xml")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return User.getProfile(is);
 	}
 	
 }
