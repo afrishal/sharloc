@@ -5,47 +5,30 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
-import com.sharlocstudio.sharloc.R;
+import com.sharlocstudio.sharloc.LoginActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class LoginServerComm extends
+public class RegisterServerComm extends
 		AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
 	private Intent homeIntent;
-	private Activity loginActivity;
+	private Activity registerActivity;
 
-	public LoginServerComm(Intent intent, Activity activity) {
+	public RegisterServerComm(Intent intent, Activity activity) {
 		homeIntent = intent;
-		loginActivity = activity;
+		registerActivity = activity;
 	}
-	
-	
 
 	@Override
 	protected void onPreExecute() {
-		EditText uEmail = (EditText) loginActivity.findViewById(R.id.login_email);
-		EditText uPass = (EditText) loginActivity.findViewById(R.id.login_password);
-		Button loginBtn = (Button) loginActivity.findViewById(R.id.login_login);
-		Button regBtn = (Button) loginActivity.findViewById(R.id.login_register);
-		ProgressBar progress = (ProgressBar) loginActivity.findViewById(R.id.login_progress_bar);
-		uEmail.setEnabled(false);
-		uPass.setEnabled(false);
-		loginBtn.setVisibility(View.INVISIBLE);
-		regBtn.setVisibility(View.INVISIBLE);
-		progress.setVisibility(View.VISIBLE);
+		
 	}
-
-
 
 	@Override
 	protected JSONObject doInBackground(List<NameValuePair>... params) {
@@ -73,12 +56,15 @@ public class LoginServerComm extends
 					homeIntent.putExtra("longitude", longitude);
 					homeIntent.putExtra("latitude", latitude);
 					homeIntent.putExtra("lastUpdate", lastUpdate);
-					loginActivity.startActivity(homeIntent);
-					loginActivity.finish();
+					registerActivity.startActivity(homeIntent);
+					registerActivity.finish();
+					LoginActivity.loginActivity.finish();
 				} else {
 					// handle if error
-					Toast.makeText(loginActivity, result.getString("message"), Toast.LENGTH_SHORT).show();
-					
+					Toast.makeText(registerActivity,
+							result.getString("message"), Toast.LENGTH_SHORT)
+							.show();
+
 				}
 			} else {
 				Log.e("login", "json error");

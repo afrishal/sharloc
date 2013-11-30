@@ -62,7 +62,7 @@
     </string-array>
 
     <string name="title_activity_login">LoginActivity</string>
-    <string name="login_email_hint">Email</string>
+    <string name="login_email_hint">E-mail</string>
     <string name="login_password_hint">Password</string>
     <string name="login_login_button_label">Login</string>
     <string name="login_register_button_label">Create an Account</string>

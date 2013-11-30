@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 	android:layout_height="match_parent"
-    
+    android:background="#EEECE1"
     >
     
     <LinearLayout 
@@ -20,6 +20,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:paddingLeft="2dp"
+	        android:textColor="#333"
 	        android:text="@string/registration_name_label" />
 	
 	    <EditText
@@ -27,7 +28,10 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
-	        android:inputType="textPersonName" >
+	        android:background="@drawable/white_flat_bg"
+	        android:inputType="textPersonName"
+	        android:hint="@string/registration_name_label" 
+	        android:gravity="center">
 	        <requestFocus />
 	    </EditText>
 	    
@@ -35,7 +39,8 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:paddingLeft="2dp"
-	        android:layout_marginTop="@dimen/activity_wide_vertical_margin"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:textColor="#333"
 	        android:text="@string/registration_email_label" />
 	    
 	    <EditText
@@ -43,13 +48,17 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
-	        android:inputType="textEmailAddress" />
+	        android:background="@drawable/white_flat_bg"
+	        android:inputType="textEmailAddress" 
+	        android:hint="@string/registration_email_label"
+	        android:gravity="center"/>
 	    
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:paddingLeft="2dp"
-	        android:layout_marginTop="@dimen/activity_wide_vertical_margin"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:textColor="#333"
 	        android:text="@string/registration_password_label" />
 	    
 	    <EditText
@@ -57,13 +66,17 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
-	        android:inputType="textPassword" />
+	        android:background="@drawable/white_flat_bg"
+	        android:inputType="textPassword" 
+	        android:hint="@string/registration_password_label"
+	        android:gravity="center"/>
 	    
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:paddingLeft="2dp"
-	        android:layout_marginTop="@dimen/activity_wide_vertical_margin"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:textColor="#333"
 	        android:text="@string/registration_password_reenter_label" />
 	    
 	    <EditText
@@ -71,14 +84,19 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
-	        android:inputType="textPassword" />
+	        android:background="@drawable/white_flat_bg"
+	        android:inputType="textPassword"
+	        android:hint="@string/registration_password_reenter_label" 
+	        android:gravity="center"/>
 
 	    <Button
 	        android:id="@+id/register_submit"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="@dimen/activity_wide_vertical_margin"
-	        android:text="@string/registration_button_label" />
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:text="@string/registration_button_label" 
+	        android:background="@drawable/custom_button"
+	        android:onClick="register"/>
 
 	</LinearLayout>
     

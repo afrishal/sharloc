@@ -35,10 +35,14 @@ public class LoginActivity extends Activity {
 	private EditText uPass;
 	private Button loginBtn;
 	private Button regBtn;
+	
+	public static LoginActivity loginActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		loginActivity = this;
 		
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 		
@@ -152,7 +156,8 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void register(View view) {
-		
+		Intent intent = new Intent(this, RegistrationActivity.class);
+		startActivity(intent);
 	}
 
 }

@@ -1,7 +1,11 @@
 package com.sharlocstudio.sharloc;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
@@ -21,9 +25,11 @@ import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.R.id;
 import com.sharlocstudio.sharloc.R.layout;
 import com.sharlocstudio.sharloc.R.string;
+import com.sharlocstudio.sharloc.support.BroadcastLocationServerComm;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -194,10 +200,18 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.home_broadcast_location:
 			getMyLocation();
-			Toast.makeText(getActivity().getApplicationContext(),
-					"Your coordinates are: " + myLat + ", " + myLong,
-					Toast.LENGTH_SHORT).show();
+			BroadcastLocationServerComm broadcast = new BroadcastLocationServerComm(getActivity());
+			// get email from shared prefs
+			SharedPreferences sharedPref = getActivity().getSharedPreferences("userData", 0);
+			String email = sharedPref.getString("email", "");
 			
+			// broadcast
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("tag", "broadcast"));
+			params.add(new BasicNameValuePair("email", email));
+			params.add(new BasicNameValuePair("longitude", String.valueOf(myLong)));
+			params.add(new BasicNameValuePair("latitude", String.valueOf(myLat)));
+			broadcast.execute(params);
 
 			card.setTitle(getAddress());
 			cardView = (CardView) getActivity().findViewById(
