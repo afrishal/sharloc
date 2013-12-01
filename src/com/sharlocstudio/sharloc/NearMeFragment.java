@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -107,9 +109,10 @@ public class NearMeFragment extends Fragment {
 					.getLongitude());
 
 			String name = nearestFriend.get(i).getName();
+			String time = getUpdateTime(nearestFriend.get(i));
 
 			googleMap.addMarker(new MarkerOptions().position(
-					new LatLng(friendLat, friendLong)).title(name));
+					new LatLng(friendLat, friendLong)).title(name + ", " + time));
 		}
 	}
 
@@ -211,5 +214,37 @@ public class NearMeFragment extends Fragment {
 		locationB.setLatitude(long2 / 1e6);
 
 		return (int) Math.round(locationA.distanceTo(locationB));
+	}
+	
+	private String getUpdateTime(User user) {
+		Timestamp time = user.getLastUpdate();
+		Timestamp now = new Timestamp(new Date().getTime());
+		long diff = now.getTime() - time.getTime();
+		Log.i("friend time", time.toString());
+		Log.i("user time", now.toString());
+		
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000) % 7;
+		long diffWeeks = diff / (7 * 24 * 60 * 1000) % 4;
+		long diffMonths = (diff / (7 * 24 * 60 * 1000)) / 30;
+			
+		if (diffMonths > 0) {
+			return (diffMonths == 1)?(diffMonths + " Month ago"):(diffMonths + " Months ago");
+		} else if (diffWeeks > 0) {
+			return (diffWeeks == 1)?(diffWeeks + " Week ago"):(diffWeeks + " Week ago");
+		} else if (diffDays > 0) {
+			return (diffDays == 1)?(diffDays + " Day ago"):(diffDays + " Days ago");
+		} else if (diffHours > 0) {
+			return (diffHours == 1)?(diffHours + " Hour ago"):(diffHours + " Hours ago");
+		} else if (diffMinutes > 0) {
+			return (diffMinutes == 1)?(diffMinutes + " Minute ago"):(diffMinutes + " Minutes ago");
+		} else if (diffSeconds > 0) {
+			return (diffSeconds == 1)?(diffSeconds + " Second ago"):(diffSeconds + " Seconds ago");
+		} else {
+			return "Now";
+		}
+		
 	}
 }
