@@ -130,28 +130,31 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		Criteria criteria = new Criteria();
 		String provider = locationManager.getBestProvider(criteria, true);
 		Location location = locationManager.getLastKnownLocation(provider);
-		
-		
-		LatLng myLastPosition = new LatLng (location.getLatitude(), location.getLongitude());
-		
-		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-				myLastPosition, 16.0f));
-		
+
+		if (location != null) {
+
+			LatLng myLastPosition = new LatLng(location.getLatitude(),
+					location.getLongitude());
+
+			googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+					myLastPosition, 16.0f));
+		}
+
 		if (googleMap.getMyLocation() != null) {
 			myLat = googleMap.getMyLocation().getLatitude();
 			myLong = googleMap.getMyLocation().getLongitude();
-			
+
 			myPosition = new LatLng(myLat, myLong);
-			
-			updateMap (myPosition);
+
+			updateMap(myPosition);
 		}
-	
+
 	}
-	
-	public void updateMap (LatLng myPosition) {
-		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-				myPosition, 16.0f));
-		
+
+	public void updateMap(LatLng myPosition) {
+		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition,
+				16.0f));
+
 		card.setTitle(getAddress(googleMap.getMyLocation()));
 		cardView = (CardView) getActivity().findViewById(
 				R.id.card_current_location);
@@ -185,7 +188,8 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private String getAddress(Location myPosition) {
 		try {
 			Geocoder geo = new Geocoder(getActivity().getApplicationContext());
-			list = geo.getFromLocation(myPosition.getLatitude(), myPosition.getLongitude(), 1);
+			list = geo.getFromLocation(myPosition.getLatitude(),
+					myPosition.getLongitude(), 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,16 +210,19 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.home_broadcast_location:
 			getMyLocation();
-			BroadcastLocationServerComm broadcast = new BroadcastLocationServerComm(getActivity());
+			BroadcastLocationServerComm broadcast = new BroadcastLocationServerComm(
+					getActivity());
 			// get email from shared prefs
-			SharedPreferences sharedPref = getActivity().getSharedPreferences("userData", 0);
+			SharedPreferences sharedPref = getActivity().getSharedPreferences(
+					"userData", 0);
 			String email = sharedPref.getString("email", "");
-			
+
 			// broadcast
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("tag", "broadcast"));
 			params.add(new BasicNameValuePair("email", email));
-			params.add(new BasicNameValuePair("longitude", String.valueOf(myLong)));
+			params.add(new BasicNameValuePair("longitude", String
+					.valueOf(myLong)));
 			params.add(new BasicNameValuePair("latitude", String.valueOf(myLat)));
 			broadcast.execute(params);
 
