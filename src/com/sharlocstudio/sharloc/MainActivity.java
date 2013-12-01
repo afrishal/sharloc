@@ -112,6 +112,7 @@ public class MainActivity extends FragmentActivity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 		} else {
 			try {
 				user = getUserProfile();
