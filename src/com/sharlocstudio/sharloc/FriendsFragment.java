@@ -97,6 +97,8 @@ public class FriendsFragment extends Fragment {
 			friendCard.setFragment(this);
 			friendCard.setFriendEmail(friend.getEmail());
 			friendCard.setCardContent(getCity(friend.getLatitude(),friend.getLongitude()) + ", " + getUpdateTime(friend));
+			friendCard.setFriendLatitude(friend.getLatitude());
+			friendCard.setFriendLongitude(friend.getLongitude());
 			friendCard.createCard();
 			friendCards.add(friendCard);
 		}

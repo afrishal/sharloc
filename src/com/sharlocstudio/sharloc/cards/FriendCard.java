@@ -29,6 +29,8 @@ public class FriendCard extends Card{
 	protected String resourceUrlThumbnail;
 	protected String friendEmail;
 	protected FriendsFragment friendsFragment;
+	protected String friendLatitude;
+	protected String friendLongitude;
 	
 	public FriendCard(Context context) {
 		super(context, R.layout.card_friend);
@@ -57,6 +59,14 @@ public class FriendCard extends Card{
 	
 	public void setFriendEmail(String email) {
 		friendEmail = email;
+	}
+	
+	public void setFriendLatitude (String latitude) {
+		friendLatitude = latitude;
+	}
+	
+	public void setFriendLongitude (String longitude) {
+		friendLongitude = longitude;
 	}
 	
 	@Override
@@ -88,6 +98,9 @@ public class FriendCard extends Card{
             		//pass object friend
             		Intent intent = new Intent(context, LocateOnMapActivity.class);
             		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //jangan hapus baris ini, dipake karna mau panggil kelas activity dari kelas non-activity
+            		intent.putExtra("userName", mTitleHeader);
+            		intent.putExtra("latitude", friendLatitude);
+            		intent.putExtra("longitude", friendLongitude);
             		context.startActivity(intent);
             		
             		break;
