@@ -4,6 +4,7 @@ import com.sharlocstudio.sharloc.R;
 
 import android.content.Context;
 import android.view.MenuItem;
+import android.widget.Toast;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
@@ -49,6 +50,24 @@ public class FriendCard extends Card{
             @Override
             public void onMenuItemClick(BaseCard card, MenuItem item) {
                 //Toast.makeText(getActivity().getApplicationContext(), "Click on card menu" + mTitleHeader +" item=" +  item.getTitle(), Toast.LENGTH_SHORT).show();
+            	switch (item.getItemId()){
+            	case R.id.menu_friend_request_location:
+            		//
+            		//ISI KALO MAU REQUEST
+            		//
+            		
+            		Toast.makeText(context, "Cek lokasi si " + mTitleHeader, Toast.LENGTH_SHORT).show();
+            		break;
+            		
+            	case R.id.menu_friend_delete:
+            		//
+            		//ISI KALO MAU DELETE
+            		//
+            		
+            		Toast.makeText(context, "Hapus si " + mTitleHeader, Toast.LENGTH_SHORT).show();
+            		break;
+            	}
+            	
             }
         });
 		

@@ -384,8 +384,6 @@ containing a value of this type.
         public static final int content_frame=0x7f05000d;
         public static final int drawer_icon=0x7f05002c;
         public static final int drawer_layout=0x7f05000c;
-        public static final int friend_delete=0x7f050040;
-        public static final int friend_retrieve_location=0x7f05003f;
         public static final int friends_fragment_card_list_friends=0x7f05002d;
         public static final int home_broadcast_location=0x7f050030;
         public static final int hybrid=0x7f050004;
@@ -400,6 +398,8 @@ containing a value of this type.
         public static final int login_register=0x7f05000b;
         public static final int map=0x7f05002e;
         public static final int maps=0x7f050022;
+        public static final int menu_friend_delete=0x7f050040;
+        public static final int menu_friend_request_location=0x7f05003f;
         public static final int method_icon=0x7f05002a;
         public static final int method_label=0x7f05002b;
         public static final int navigation_drawer=0x7f05000e;
@@ -588,10 +588,6 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int contact_add_method_nfc=0x7f060035;
         public static final int contact_add_method_qr_code=0x7f060034;
-        public static final int contact_delete=0x7f060033;
-        /**  Strings for friend fragment 
-         */
-        public static final int contact_request_location=0x7f060032;
         public static final int drawer_close=0x7f06003b;
         /**  Strings for navigation drawer 
          */
@@ -601,6 +597,10 @@ containing a value of this type.
         public static final int error_incorrect_password=0x7f060049;
         public static final int error_invalid_email=0x7f060047;
         public static final int error_invalid_password=0x7f060048;
+        public static final int friend_delete=0x7f060033;
+        /**  Strings for friend fragment 
+         */
+        public static final int friend_request_location=0x7f060032;
         public static final int hello_world=0x7f06001d;
         public static final int item_about=0x7f06002a;
         /**  Strings for settings activity | KALO SETTINGS DIPENCET 

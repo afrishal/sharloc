@@ -37,8 +37,8 @@
     <string name="emailDummy1">yehezkiel.chrisby@gmail.com</string>
 
     <!-- Strings for friend fragment -->
-    <string name="contact_request_location">Request Location</string>
-    <string name="contact_delete">Delete Contact</string>
+    <string name="friend_request_location">Request Location</string>
+    <string name="friend_delete">Delete Contact</string>
     <string name="contact_add_method_qr_code">Add using Barcode Scanner</string>
     <string name="contact_add_method_nfc">Add using NFC</string>
     <string name="qr_code_description">Scan your friend\'s QR Code</string>
