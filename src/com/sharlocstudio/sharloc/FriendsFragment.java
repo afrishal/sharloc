@@ -1,27 +1,15 @@
 package com.sharlocstudio.sharloc;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.xmlpull.v1.XmlPullParserException;
-
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.view.CardListView;
-import it.gmariotti.cardslib.library.view.CardView;
-
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
-import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.LoadFriendServerComm;
 
@@ -36,7 +24,7 @@ import android.view.ViewGroup;
 
 public class FriendsFragment extends Fragment {
 	
-	private ArrayList<User> friendList;
+	public static FriendsFragment friendsFragment;
 	
 	public FriendsFragment() {
 		//Empty constructor  required for fragment subclasses
@@ -47,7 +35,7 @@ public class FriendsFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
 		setHasOptionsMenu(true); //kasih tau kalo fragmen ini punya options menu sendiri
 
-		
+		friendsFragment = this;
 		return rootView;
 	}
 	
@@ -98,6 +86,8 @@ public class FriendsFragment extends Fragment {
 		for (User friend : friendList) {
 			FriendCard friendCard = new FriendCard(getActivity().getApplicationContext());
 			friendCard.setCardHeader(friend.getName());
+			friendCard.setFragment(this);
+			friendCard.setFriendEmail(friend.getEmail());
 			friendCard.setCardContent(friend.getLongitude() + ", " + friend.getLatitude());
 			friendCard.createCard();
 			friendCards.add(friendCard);
@@ -148,11 +138,15 @@ public class FriendsFragment extends Fragment {
 		
 	}
 	
-	private String getUserEmail() {
+	public String getUserEmail() {
 		// get email from shared prefs
 		SharedPreferences sharedPref = getActivity().getSharedPreferences("userData", 0);
 		String email = sharedPref.getString("email", "");
 		return email;
+	}
+	
+	public void refreshFriendList() {
+		loadFriend();
 	}
 	
 }

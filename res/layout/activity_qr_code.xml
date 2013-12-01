@@ -27,11 +27,4 @@
         android:text="@string/qr_code_description"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/scanText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scanning..." >
-    </TextView>
-
 </RelativeLayout>

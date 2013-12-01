@@ -6,45 +6,38 @@ import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
 import com.sharlocstudio.sharloc.FriendsFragment;
-import com.sharlocstudio.sharloc.MainActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class AddFriendServerComm extends
-		AsyncTask<List<NameValuePair>, Void, JSONObject> {
-
+public class RemoveFriendServerComm extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+	
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
-	private Activity addActivity;
+	private FriendsFragment friendsFragment;
 
-	public AddFriendServerComm(Activity activity) {
-		addActivity = activity;
+	public RemoveFriendServerComm(FriendsFragment fragment) {
+		friendsFragment = fragment;
 	}
-
+	
 	@Override
 	protected JSONObject doInBackground(List<NameValuePair>... params) {
 		Log.i("onBackground", params[0].toString());
 		JSONParser jsonParser = new JSONParser();
 		return jsonParser.getJSONFromUrl(serverURL, params[0]);
 	}
-
-	@Override
+	
 	protected void onPostExecute(JSONObject result) {
 		try {
 			if (result != null) {
 				Log.i("JSON", result.toString());
-				if (result.getString("success") != null) {
-					Toast.makeText(addActivity, result.getString("message"),
+				if (result.getString("success").equals(String.valueOf(1))) {
+					Toast.makeText(friendsFragment.getActivity(), result.getString("message"),
 							Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(addActivity, MainActivity.class);
-					addActivity.startActivity(intent);
-					addActivity.finish();
+					friendsFragment.refreshFriendList();
 				}
 			} else {
-				Toast.makeText(addActivity, "Failed to Connect Server",
+				Toast.makeText(friendsFragment.getActivity(), "Failed to Connect Server",
 						Toast.LENGTH_SHORT).show();
 				Log.e("login", "json error");
 			}

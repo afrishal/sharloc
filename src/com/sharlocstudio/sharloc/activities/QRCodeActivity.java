@@ -1,40 +1,28 @@
 package com.sharlocstudio.sharloc.activities;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.sharlocstudio.sharloc.MainActivity;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.support.AddFriendServerComm;
 import com.sharlocstudio.sharloc.support.CameraPreview;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.Button;
 
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 
 import android.widget.TextView;
-import android.graphics.ImageFormat;
-
 /* Import ZBar Class files */
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
@@ -77,8 +65,6 @@ public class QRCodeActivity extends Activity {
 		mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_viewfinder);
 		preview.addView(mPreview);
-
-		scanText = (TextView) findViewById(R.id.scanText);
 	}
 
 	@Override

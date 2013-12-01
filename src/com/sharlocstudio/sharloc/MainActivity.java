@@ -9,11 +9,8 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,9 +18,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.sharlocstudio.sharloc.activities.NFCActivity;
 import com.sharlocstudio.sharloc.activities.QRCodeActivity;
+import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.GcmIntentService;
-import com.sharlocstudio.sharloc.support.LoadFriendServerComm;
 import com.sharlocstudio.sharloc.support.RegisterGCMServerComm;
 
 import android.os.Bundle;
@@ -74,7 +71,6 @@ public class MainActivity extends FragmentActivity {
 	private Intent intent;
 	private User user;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -460,11 +456,30 @@ public class MainActivity extends FragmentActivity {
 		regGCM.execute(email);
 	}
 	
-	private String getUserEmail() {
-		// get email from shared prefs
-		SharedPreferences sharedPref = getSharedPreferences("userData", 0);
-		String email = sharedPref.getString("email", "");
-		return email;
+	public void logout(View view) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure?")
+	       .setTitle("Logout");
+		// Add the buttons
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				File userFile = new File(getFilesDir() + "/" + User.FILE_NAME);
+				File friendsFile = new File(getFilesDir() + "/" + Friends.FILE_NAME);
+				userFile.delete();
+				friendsFile.delete();
+				Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+				startActivity(intent);
+				finish();
+			}
+		});
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// User cancelled the dialog
+					}
+				});
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 }
