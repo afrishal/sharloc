@@ -189,7 +189,7 @@ public class NearMeFragment extends Fragment {
 			double friendLat = Double.parseDouble(friend.getLatitude());
 			double friendLong = Double.parseDouble(friend.getLongitude());
 
-			int distance = getDistance(myLat, myLong, friendLat, friendLong);
+			int distance = getDistance(myLat, friendLat, friendLong, myLong);
 			
 			if (distance <= 1500) {
 				nearestFriend.add(friend);
