@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.sharlocstudio.sharloc.MainActivity;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.support.AddFriendServerComm;
 import com.sharlocstudio.sharloc.support.CameraPreview;

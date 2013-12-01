@@ -76,7 +76,7 @@ public class FriendCard extends Card{
             		break;
             	case R.id.menu_friend_delete:
             		AlertDialog.Builder builder = new AlertDialog.Builder(friendsFragment.getActivity());
-            		builder.setMessage("Are you sure?")
+            		builder.setMessage("Remove "+ mTitleHeader + "?")
             	       .setTitle("Remove Friend");
             		// Add the buttons
             		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

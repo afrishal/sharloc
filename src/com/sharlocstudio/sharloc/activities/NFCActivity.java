@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.sharlocstudio.sharloc.support.AddFriendServerComm;
 import com.sharlocstudio.sharloc.support.NfcUtils;
+import com.sharlocstudio.sharloc.FriendsFragment;
 import com.sharlocstudio.sharloc.MainActivity;
 import com.sharlocstudio.sharloc.R;
 import android.nfc.NdefMessage;
@@ -64,8 +65,6 @@ public class NFCActivity extends Activity implements CreateNdefMessageCallback,
 			case MESSAGE_SENT:
 				Toast.makeText(getApplicationContext(), "Request sent!",
 						Toast.LENGTH_LONG).show();
-				Intent intent = new Intent (NFCActivity.this, MainActivity.class);
-				startActivity(intent);
 				finish();
 				break;
 			}
