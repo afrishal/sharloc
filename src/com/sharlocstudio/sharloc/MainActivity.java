@@ -70,14 +70,14 @@ public class MainActivity extends FragmentActivity {
 	private String[] drawerMenuArray;
 	private Intent intent;
 	private User user;
-	
+
 	public static MainActivity mainActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		mainActivity = this;
 
 		// atur nama action bar pertama kali jadi langsung "home"
@@ -121,8 +121,6 @@ public class MainActivity extends FragmentActivity {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
 		// check play service
 		context = getApplicationContext();
@@ -205,6 +203,10 @@ public class MainActivity extends FragmentActivity {
 				menu.findItem(R.id.action_add_friend).setVisible(false);
 			}
 
+			if (menu.findItem(R.id.action_refresh_friend) != null) {
+				menu.findItem(R.id.action_refresh_friend).setVisible(false);
+			}
+
 			if (menu.findItem(R.id.action_edit_profile) != null) {
 				menu.findItem(R.id.action_edit_profile).setVisible(false);
 			}
@@ -246,7 +248,7 @@ public class MainActivity extends FragmentActivity {
 		// Handle action buttons
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
 			// intent = new Intent(MainActivity.this,
 			// RegistrationActivity.class);
 			// startActivity(intent);
@@ -254,6 +256,9 @@ public class MainActivity extends FragmentActivity {
 		case R.id.action_add_friend:
 			// Toast.makeText(this, "Add Friend", Toast.LENGTH_LONG).show();
 			createAddFriendDialog();
+			break;
+		case R.id.action_refresh_friend:
+			Toast.makeText(this, "Refresh List", Toast.LENGTH_SHORT).show();
 			break;
 		}
 
@@ -459,19 +464,20 @@ public class MainActivity extends FragmentActivity {
 				context);
 		regGCM.execute(email);
 	}
-	
+
 	public void logout(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure?")
-	       .setTitle("Logout");
+		builder.setMessage("Are you sure?").setTitle("Logout");
 		// Add the buttons
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				File userFile = new File(getFilesDir() + "/" + User.FILE_NAME);
-				File friendsFile = new File(getFilesDir() + "/" + Friends.FILE_NAME);
+				File friendsFile = new File(getFilesDir() + "/"
+						+ Friends.FILE_NAME);
 				userFile.delete();
 				friendsFile.delete();
-				Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+				Intent intent = new Intent(MainActivity.this,
+						LoginActivity.class);
 				startActivity(intent);
 				finish();
 			}
