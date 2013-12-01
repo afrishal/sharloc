@@ -12,23 +12,17 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.view.CardView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.sharlocstudio.sharloc.R;
-import com.sharlocstudio.sharloc.R.id;
-import com.sharlocstudio.sharloc.R.layout;
-import com.sharlocstudio.sharloc.R.string;
 import com.sharlocstudio.sharloc.support.BroadcastLocationServerComm;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Criteria;
@@ -36,14 +30,11 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements OnClickListener {
 
@@ -133,22 +124,38 @@ public class HomeFragment extends Fragment implements OnClickListener {
 
 	private void getMyLocation() {
 		googleMap.setMyLocationEnabled(true);
+		getActivity();
 		LocationManager locationManager = (LocationManager) getActivity()
-				.getSystemService(getActivity().LOCATION_SERVICE);
+				.getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
 		String provider = locationManager.getBestProvider(criteria, true);
 		Location location = locationManager.getLastKnownLocation(provider);
 		
-		if (location != null) {
-			myLat = location.getLatitude();
-			myLong = location.getLongitude();
+		
+		LatLng myLastPosition = new LatLng (location.getLatitude(), location.getLongitude());
+		
+		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+				myLastPosition, 16.0f));
+		
+		if (googleMap.getMyLocation() != null) {
+			myLat = googleMap.getMyLocation().getLatitude();
+			myLong = googleMap.getMyLocation().getLongitude();
 			
 			myPosition = new LatLng(myLat, myLong);
-
-			googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-					myPosition, 16.0f));
-
+			
+			updateMap (myPosition);
 		}
+	
+	}
+	
+	public void updateMap (LatLng myPosition) {
+		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+				myPosition, 16.0f));
+		
+		card.setTitle(getAddress(googleMap.getMyLocation()));
+		cardView = (CardView) getActivity().findViewById(
+				R.id.card_current_location);
+		cardView.refreshCard(card);
 	}
 
 	@Override
@@ -175,12 +182,10 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		cardView.setCard(card);
 	}
 
-	private String getAddress() {
-		getMyLocation();
-
+	private String getAddress(Location myPosition) {
 		try {
 			Geocoder geo = new Geocoder(getActivity().getApplicationContext());
-			list = geo.getFromLocation(myLat, myLong, 1);
+			list = geo.getFromLocation(myPosition.getLatitude(), myPosition.getLongitude(), 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -195,6 +200,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -212,11 +218,6 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			params.add(new BasicNameValuePair("longitude", String.valueOf(myLong)));
 			params.add(new BasicNameValuePair("latitude", String.valueOf(myLat)));
 			broadcast.execute(params);
-
-			card.setTitle(getAddress());
-			cardView = (CardView) getActivity().findViewById(
-					R.id.card_current_location);
-			cardView.refreshCard(card);
 
 			break;
 		}
