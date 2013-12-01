@@ -1,9 +1,15 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import com.sharlocstudio.sharloc.model.Friends;
+import com.sharlocstudio.sharloc.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -39,7 +45,7 @@ public class SettingsActivity extends Activity {
 					startActivity(intent);
 				} else if (position == 1){
 					//Sign Out
-					
+					logout();
 				}
 				
 			}
@@ -53,6 +59,33 @@ public class SettingsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.settings, menu);
 		return true;
+	}
+	
+	public void logout() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure?").setTitle("Logout");
+		// Add the buttons
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				File userFile = new File(getFilesDir() + "/" + User.FILE_NAME);
+				File friendsFile = new File(getFilesDir() + "/"
+						+ Friends.FILE_NAME);
+				userFile.delete();
+				friendsFile.delete();
+				Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+				startActivity(intent);
+				MainActivity.mainActivity.finish();
+				finish();
+			}
+		});
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// User cancelled the dialog
+					}
+				});
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 }
