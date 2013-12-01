@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#EEECE1"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AboutActivity" >
+
+    <ImageView
+        android:id="@+id/sharloc_about_logo"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/logo_image" />
+
+    <ImageView
+        android:id="@+id/sharloc_about_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/logo_text" />
+
+    <ImageView
+        android:id="@+id/sharloc_about_tagline"
+        android:layout_width="match_parent"
+        android:layout_marginTop="-10dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logo_tagline"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/sharloc_about_developer"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/logo_developer"
+        android:visibility="invisible" />
+
+</LinearLayout>

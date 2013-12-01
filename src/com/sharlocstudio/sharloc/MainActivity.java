@@ -248,10 +248,9 @@ public class MainActivity extends FragmentActivity {
 		// Handle action buttons
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-			// intent = new Intent(MainActivity.this,
-			// RegistrationActivity.class);
-			// startActivity(intent);
+			//Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+			intent = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.action_add_friend:
 			// Toast.makeText(this, "Add Friend", Toast.LENGTH_LONG).show();

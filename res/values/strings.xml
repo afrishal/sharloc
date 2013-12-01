@@ -69,5 +69,13 @@
     <string name="login_login_button_label">Login</string>
     <string name="login_register_button_label">Create an Account</string>
     <string name="title_activity_locate_on_map">Map</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string-array name="settings_menu_array">
+        <item>About</item>
+        <item>Sign Out</item>
+    </string-array>
+
+    <string name="title_activity_about">About</string>
 
 </resources>
