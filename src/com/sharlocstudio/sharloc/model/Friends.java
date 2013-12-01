@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -117,6 +118,7 @@ public class Friends {
 			}
 			eventType = parser.next();
 		}
+		Collections.sort(friendList);
 		return friendList;
 	}
 }
