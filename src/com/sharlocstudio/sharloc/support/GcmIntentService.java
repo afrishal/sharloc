@@ -9,6 +9,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -69,6 +71,9 @@ public class GcmIntentService extends IntentService {
 	}
 
 	private void sendNotification(Bundle bundle) {
+		
+		Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
 		mNotificationManager = (NotificationManager) this
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -78,6 +83,7 @@ public class GcmIntentService extends IntentService {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 				this)
 				.setSmallIcon(R.drawable.ic_notification)
+				.setSound(soundUri)
 				.setContentTitle(bundle.getString("title"))
 				.setStyle(
 						new NotificationCompat.BigTextStyle().bigText(bundle
@@ -90,6 +96,9 @@ public class GcmIntentService extends IntentService {
 	}
 
 	private void sendNotification(String string) {
+		
+		Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		
 		mNotificationManager = (NotificationManager) this
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -99,6 +108,7 @@ public class GcmIntentService extends IntentService {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 				this)
 				.setSmallIcon(R.drawable.ic_notification)
+				.setSound(soundUri)
 				.setContentTitle("GCM Notification")
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(string))
 				.setContentText("testtest");
