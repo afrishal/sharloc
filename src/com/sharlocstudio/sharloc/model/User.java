@@ -15,7 +15,7 @@ import android.util.Xml;
 
 
 
-public class User {
+public class User implements Comparable<User> {
 	
 	private String email;
 	private String name;
@@ -163,5 +163,12 @@ public class User {
 		}
 		return false;
 	}
+
+	@Override
+	public int compareTo(User another) {
+		return this.name.compareToIgnoreCase(another.getName());
+	}
+	
+	
 
 }

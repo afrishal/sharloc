@@ -1,7 +1,9 @@
 package com.sharlocstudio.sharloc;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -94,7 +96,7 @@ public class FriendsFragment extends Fragment {
 			friendCard.setCardHeader(friend.getName());
 			friendCard.setFragment(this);
 			friendCard.setFriendEmail(friend.getEmail());
-			friendCard.setCardContent(getCity(friend.getLatitude(),friend.getLongitude()));
+			friendCard.setCardContent(getCity(friend.getLatitude(),friend.getLongitude()) + ", " + getUpdateTime(friend));
 			friendCard.createCard();
 			friendCards.add(friendCard);
 		}
@@ -176,6 +178,38 @@ public class FriendsFragment extends Fragment {
 	
 	public void refreshFriendList() {
 		loadFriend();
+	}
+	
+	private String getUpdateTime(User user) {
+		Timestamp time = user.getLastUpdate();
+		Timestamp now = new Timestamp(new Date().getTime());
+		long diff = now.getTime() - time.getTime();
+		Log.i("friend time", time.toString());
+		Log.i("user time", now.toString());
+		
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000) % 7;
+		long diffWeeks = diff / (7 * 24 * 60 * 1000) % 4;
+		long diffMonths = (diff / (7 * 24 * 60 * 1000)) / 30;
+			
+		if (diffMonths > 0) {
+			return (diffMonths == 1)?(diffMonths + " Month ago"):(diffMonths + " Months ago");
+		} else if (diffWeeks > 0) {
+			return (diffWeeks == 1)?(diffWeeks + " Week ago"):(diffWeeks + " Week ago");
+		} else if (diffDays > 0) {
+			return (diffDays == 1)?(diffDays + " Day ago"):(diffDays + " Days ago");
+		} else if (diffHours > 0) {
+			return (diffHours == 1)?(diffHours + " Hour ago"):(diffHours + " Hours ago");
+		} else if (diffMinutes > 0) {
+			return (diffMinutes == 1)?(diffMinutes + " Minute ago"):(diffMinutes + " Minutes ago");
+		} else if (diffSeconds > 0) {
+			return (diffSeconds == 1)?(diffSeconds + " Second ago"):(diffSeconds + " Seconds ago");
+		} else {
+			return "Now";
+		}
+		
 	}
 	
 }
