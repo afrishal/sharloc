@@ -46,7 +46,7 @@ public class LoginActivity extends Activity {
 		
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 		
-		if (User.isLoggedIn(getFilesDir()+"/user.xml")) {
+		if (User.isLoggedIn(getFilesDir() + "/" + User.FILE_NAME)) {
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			finish();

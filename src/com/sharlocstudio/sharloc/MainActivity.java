@@ -9,8 +9,11 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -20,6 +23,7 @@ import com.sharlocstudio.sharloc.activities.NFCActivity;
 import com.sharlocstudio.sharloc.activities.QRCodeActivity;
 import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.GcmIntentService;
+import com.sharlocstudio.sharloc.support.LoadFriendServerComm;
 import com.sharlocstudio.sharloc.support.RegisterGCMServerComm;
 
 import android.os.Bundle;
@@ -70,6 +74,7 @@ public class MainActivity extends FragmentActivity {
 	private Intent intent;
 	private User user;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,7 +90,7 @@ public class MainActivity extends FragmentActivity {
 		mNotificationManager.cancel(GcmIntentService.NOTIFICATION_ID);
 
 		// create user profile
-		if (!User.isLoggedIn(getFilesDir() + "/user.xml")) {
+		if (!User.isLoggedIn(getFilesDir() + "/" + User.FILE_NAME)) {
 			Intent intent = getIntent();
 			String name = intent.getStringExtra("name");
 			String email = intent.getStringExtra("email");
@@ -116,6 +121,13 @@ public class MainActivity extends FragmentActivity {
 				e.printStackTrace();
 			}
 		}
+		
+		// load friend from server
+		LoadFriendServerComm loadFriendSC = new LoadFriendServerComm(this);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "load_friend"));
+		params.add(new BasicNameValuePair("email", getUserEmail()));
+		loadFriendSC.execute(params);
 
 		// check play service
 		context = getApplicationContext();
@@ -387,13 +399,13 @@ public class MainActivity extends FragmentActivity {
 		InputStream is = null;
 		try {
 			is = new BufferedInputStream(new FileInputStream(new File(
-					getFilesDir() + "/user.xml")));
+					getFilesDir() + "/" + User.FILE_NAME)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return User.getProfile(is);
 	}
-	
+
 	private boolean checkPlayService() {
 		int resultCode = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(this);
@@ -409,10 +421,11 @@ public class MainActivity extends FragmentActivity {
 		}
 		return true;
 	}
-	
+
 	private String getRegistrationId(Context context2) {
 		final SharedPreferences prefs = getGCMPreferences(context);
-		String registrationId = prefs.getString(RegisterGCMServerComm.PROPERTY_REG_ID, "");
+		String registrationId = prefs.getString(
+				RegisterGCMServerComm.PROPERTY_REG_ID, "");
 		if (registrationId.isEmpty()) {
 			Log.i(RegisterGCMServerComm.TAG, "Registration not found.");
 			return "";
@@ -420,8 +433,8 @@ public class MainActivity extends FragmentActivity {
 		// Check if app was updated; if so, it must clear the registration ID
 		// since the existing regID is not guaranteed to work with the new
 		// app version.
-		int registeredVersion = prefs.getInt(RegisterGCMServerComm.PROPERTY_APP_VERSION,
-				Integer.MIN_VALUE);
+		int registeredVersion = prefs.getInt(
+				RegisterGCMServerComm.PROPERTY_APP_VERSION, Integer.MIN_VALUE);
 		int currentVersion = getAppVersion(context);
 		if (registeredVersion != currentVersion) {
 			Log.i(RegisterGCMServerComm.TAG, "App version changed.");
@@ -429,12 +442,12 @@ public class MainActivity extends FragmentActivity {
 		}
 		return registrationId;
 	}
-	
+
 	private SharedPreferences getGCMPreferences(Context context2) {
 		return getSharedPreferences(MainActivity.class.getSimpleName(),
 				Context.MODE_PRIVATE);
 	}
-	
+
 	private int getAppVersion(Context context2) {
 		try {
 			PackageInfo packageInfo = context.getPackageManager()
@@ -445,10 +458,18 @@ public class MainActivity extends FragmentActivity {
 			throw new RuntimeException("Could not get package name: " + e);
 		}
 	}
-	
+
 	private void registerInBackground(String email) {
-		RegisterGCMServerComm regGCM = new RegisterGCMServerComm(this, gcm, context);
+		RegisterGCMServerComm regGCM = new RegisterGCMServerComm(this, gcm,
+				context);
 		regGCM.execute(email);
+	}
+	
+	private String getUserEmail() {
+		// get email from shared prefs
+		SharedPreferences sharedPref = getSharedPreferences("userData", 0);
+		String email = sharedPref.getString("email", "");
+		return email;
 	}
 
 }

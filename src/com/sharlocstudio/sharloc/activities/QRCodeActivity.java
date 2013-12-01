@@ -179,7 +179,6 @@ public class QRCodeActivity extends Activity {
 	
 	@SuppressWarnings("unchecked")
 	private void addRelation(Symbol sym) {
-		
 		String user1 = getUserEmail();
 		String user2 = sym.getData();
 		AddFriendServerComm addFriend = new AddFriendServerComm(this);

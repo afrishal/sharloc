@@ -1,6 +1,17 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.xmlpull.v1.XmlPullParserException;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
@@ -10,8 +21,12 @@ import it.gmariotti.cardslib.library.view.CardView;
 
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
+import com.sharlocstudio.sharloc.model.Friends;
+import com.sharlocstudio.sharloc.model.User;
+import com.sharlocstudio.sharloc.support.LoadFriendServerComm;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +35,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FriendsFragment extends Fragment {
+	
+	private ArrayList<User> friendList;
 	
 	public FriendsFragment() {
 		//Empty constructor  required for fragment subclasses
@@ -38,6 +55,7 @@ public class FriendsFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
 		
+		friendList = loadFriend();
 		initCards();
 	}
 	
@@ -78,29 +96,37 @@ public class FriendsFragment extends Fragment {
 		
 		ArrayList<Card> friendCards = new ArrayList<Card>();
 		
-		FriendCard friend1 = new FriendCard(getActivity().getApplicationContext());
-		friend1.setCardHeader("Afrishal Priyandhana");
-		friend1.setCardContent("At Depok, 21 mins ago");
-		friend1.createCard();
-		friendCards.add(friend1);
+		for (User friend : friendList) {
+			FriendCard friendCard = new FriendCard(getActivity().getApplicationContext());
+			friendCard.setCardHeader(friend.getName());
+			friendCard.setCardContent(friend.getLongitude() + ", " + friend.getLatitude());
+			friendCard.createCard();
+			friendCards.add(friendCard);
+		}
 		
-		FriendCard friend2 = new FriendCard(getActivity().getApplicationContext());
-		friend2.setCardHeader("Harish Muhammad Nazief");
-		friend2.setCardContent("At Bogor, just now");
-		friend2.createCard();
-		friendCards.add(friend2);
-		
-		FriendCard friend3 = new FriendCard(getActivity().getApplicationContext());
-		friend3.setCardHeader("Nisrina Rahmah");
-		friend3.setCardContent("At Cawang, 2 hours ago");
-		friend3.createCard();
-		friendCards.add(friend3);
-		
-		FriendCard friend4 = new FriendCard(getActivity().getApplicationContext());
-		friend4.setCardHeader("Yehezkiel Chrisby Gulo");
-		friend4.setCardContent("At Cawang, 48 mins ago");
-		friend4.createCard();
-		friendCards.add(friend4);
+//		FriendCard friend1 = new FriendCard(getActivity().getApplicationContext());
+//		friend1.setCardHeader("Afrishal Priyandhana");
+//		friend1.setCardContent("At Depok, 21 mins ago");
+//		friend1.createCard();
+//		friendCards.add(friend1);
+//		
+//		FriendCard friend2 = new FriendCard(getActivity().getApplicationContext());
+//		friend2.setCardHeader("Harish Muhammad Nazief");
+//		friend2.setCardContent("At Bogor, just now");
+//		friend2.createCard();
+//		friendCards.add(friend2);
+//		
+//		FriendCard friend3 = new FriendCard(getActivity().getApplicationContext());
+//		friend3.setCardHeader("Nisrina Rahmah");
+//		friend3.setCardContent("At Cawang, 2 hours ago");
+//		friend3.createCard();
+//		friendCards.add(friend3);
+//		
+//		FriendCard friend4 = new FriendCard(getActivity().getApplicationContext());
+//		friend4.setCardHeader("Yehezkiel Chrisby Gulo");
+//		friend4.setCardContent("At Cawang, 48 mins ago");
+//		friend4.createCard();
+//		friendCards.add(friend4);
 		
 		CardArrayAdapter friendCardArrayAdapter = new CardArrayAdapter(getActivity(),friendCards);
 		friendCardArrayAdapter.setInnerViewTypeCount(1);
@@ -110,6 +136,35 @@ public class FriendsFragment extends Fragment {
 			friendCardListView.setAdapter(friendCardArrayAdapter);
 		}
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private ArrayList<User> loadFriend() {
+		InputStream is;
+		ArrayList<User> friendList = null;
+		try {
+			is = new BufferedInputStream(new FileInputStream(new File(getActivity().getFilesDir() + "/" + Friends.FILE_NAME)));
+			friendList = Friends.getFriendList(is);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return friendList;
+		
+	}
+	
+	private String getUserEmail() {
+		// get email from shared prefs
+		SharedPreferences sharedPref = getActivity().getSharedPreferences("userData", 0);
+		String email = sharedPref.getString("email", "");
+		return email;
 	}
 	
 }
