@@ -142,6 +142,9 @@ public class NearMeFragment extends Fragment {
 
 		LatLng myLastPosition = new LatLng(location.getLatitude(),
 				location.getLongitude());
+		
+		myLat = location.getLatitude();
+		myLong = location.getLongitude();
 
 		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
 				myLastPosition, 16.0f));
@@ -152,7 +155,6 @@ public class NearMeFragment extends Fragment {
 
 			myPosition = new LatLng(myLat, myLong);
 		}
-
 	}
 
 	private ArrayList<User> getFriendList() {
@@ -189,7 +191,7 @@ public class NearMeFragment extends Fragment {
 			double friendLat = Double.parseDouble(friend.getLatitude());
 			double friendLong = Double.parseDouble(friend.getLongitude());
 
-			int distance = getDistance(myLat, friendLat, friendLong, myLong);
+			float distance = getDistance(myLat, friendLat, myLong, friendLong);
 			
 			if (distance <= 1500) {
 				nearestFriend.add(friend);
@@ -199,17 +201,14 @@ public class NearMeFragment extends Fragment {
 		return nearestFriend;
 	}
 
-	private int getDistance(double lat1, double lat2, double long1,
+	private float getDistance(double lat1, double lat2, double long1,
 			double long2) {
 
-		Location locationA = new Location("point A");
-		locationA.setLatitude(lat1 / 1e6);
-		locationA.setLongitude(long1 / 1e6);
-
-		Location locationB = new Location("point B");
-		locationB.setLatitude(lat2 / 1e6);
-		locationB.setLatitude(long2 / 1e6);
-
-		return (int) Math.round(locationA.distanceTo(locationB));
+		float[] result = new float[3];
+		
+		Location.distanceBetween(lat1, long1, lat2, long2, result);
+		
+		return result[0];
+		
 	}
 }
