@@ -32,6 +32,7 @@
     <string name="label_current_location">Current Location</string>
     <string name="button_broadcast_location">Broadcast Location</string>
     <string name="action_add_friend">Add Friend</string>
+    <string name="action_refresh_friend">Refresh</string>
     <string name="action_edit_profile">Edit Profile</string>
     <string name="accountDummy1">Yehezkiel Chrisby Gulo</string>
     <string name="emailDummy1">yehezkiel.chrisby@gmail.com</string>
