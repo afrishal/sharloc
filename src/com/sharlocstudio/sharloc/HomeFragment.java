@@ -176,7 +176,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		cardHeader.setTitle(getResources().getString(
 				R.string.label_current_location));
 		card.addCardHeader(cardHeader);
-		card.setTitle("Waiting for current location..");
+		card.setTitle("Press Broadcast Location to share your location");
 		cardView = (CardView) getActivity().findViewById(
 				R.id.card_current_location);
 		cardView.setCard(card);
