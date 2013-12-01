@@ -73,16 +73,16 @@ public final class R {
 		public static final int card_selector = 0x7f020006;
 		public static final int card_shadow = 0x7f020007;
 		public static final int card_undo = 0x7f020008;
-		public static final int ic_menu_expand_card_dark_normal = 0x7f020027;
-		public static final int ic_menu_expand_card_dark_pressed = 0x7f020028;
-		public static final int ic_menu_overflow_card_dark_normal = 0x7f020029;
-		public static final int ic_menu_overflow_card_dark_pressed = 0x7f02002a;
-		public static final int ic_undobar_undo = 0x7f020033;
-		public static final int pressed_background_card = 0x7f02003b;
-		public static final int undobar = 0x7f02003d;
-		public static final int undobar_button_focused = 0x7f02003e;
-		public static final int undobar_button_pressed = 0x7f02003f;
-		public static final int undobar_divider = 0x7f020040;
+		public static final int ic_menu_expand_card_dark_normal = 0x7f020028;
+		public static final int ic_menu_expand_card_dark_pressed = 0x7f020029;
+		public static final int ic_menu_overflow_card_dark_normal = 0x7f02002a;
+		public static final int ic_menu_overflow_card_dark_pressed = 0x7f02002b;
+		public static final int ic_undobar_undo = 0x7f020034;
+		public static final int pressed_background_card = 0x7f02003c;
+		public static final int undobar = 0x7f02003e;
+		public static final int undobar_button_focused = 0x7f02003f;
+		public static final int undobar_button_pressed = 0x7f020040;
+		public static final int undobar_divider = 0x7f020041;
 	}
 	public static final class id {
 		public static final int card_content_expand_layout = 0x7f050024;
