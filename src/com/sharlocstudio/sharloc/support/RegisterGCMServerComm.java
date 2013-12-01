@@ -94,7 +94,13 @@ public class RegisterGCMServerComm extends AsyncTask<String, Void, String> {
 		params.add(new BasicNameValuePair("gcmID", regId));
 		String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
 		JSONParser jsonParser = new JSONParser();
-		jsonParser.getJSONFromUrl(serverURL, params);
+		while(jsonParser.getJSONFromUrl(serverURL, params) == null) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private SharedPreferences getGCMPreferences(Context context2) {

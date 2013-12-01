@@ -10,7 +10,6 @@ import com.sharlocstudio.sharloc.support.SHAHasher;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -40,6 +39,7 @@ public class RegistrationActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void register(View view) {
 		SHAHasher hasher = new SHAHasher();
 		String name = uName.getText().toString();
@@ -52,8 +52,7 @@ public class RegistrationActivity extends Activity {
 		params.add(new BasicNameValuePair("email", email));
 		params.add(new BasicNameValuePair("password", password));
 		params.add(new BasicNameValuePair("confirm", passConf));
-		Intent intent = new Intent(this, MainActivity.class);
-		RegisterServerComm regComm = new RegisterServerComm(intent, this);
+		RegisterServerComm regComm = new RegisterServerComm(this);
 		regComm.execute(params);
 		
 	}

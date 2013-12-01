@@ -1,11 +1,20 @@
 package com.sharlocstudio.sharloc.activities;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.sharlocstudio.sharloc.MainActivity;
 import com.sharlocstudio.sharloc.R;
+import com.sharlocstudio.sharloc.support.AddFriendServerComm;
 import com.sharlocstudio.sharloc.support.CameraPreview;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -91,7 +100,7 @@ public class QRCodeActivity extends Activity {
 
 		if (mCamera == null) {
 			mCamera = getCameraInstance();
-			
+
 			/* Instance barcode scanner */
 			scanner = new ImageScanner();
 			scanner.setConfig(0, Config.X_DENSITY, 3);
@@ -146,8 +155,9 @@ public class QRCodeActivity extends Activity {
 
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
-					scanText.setText("barcode result " + sym.getData());
+					// scanText.setText("barcode result " + sym.getData());
 					barcodeScanned = true;
+					addRelation(sym);
 				}
 			}
 		}
@@ -159,4 +169,24 @@ public class QRCodeActivity extends Activity {
 			autoFocusHandler.postDelayed(doAutoFocus, 1000);
 		}
 	};
+	
+	private String getUserEmail() {
+		// get email from shared prefs
+		SharedPreferences sharedPref = getSharedPreferences("userData", 0);
+		String email = sharedPref.getString("email", "");
+		return email;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void addRelation(Symbol sym) {
+		
+		String user1 = getUserEmail();
+		String user2 = sym.getData();
+		AddFriendServerComm addFriend = new AddFriendServerComm(this);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "add_relation"));
+		params.add(new BasicNameValuePair("user1", user1));
+		params.add(new BasicNameValuePair("user2", user2));
+		addFriend.execute(params);
+	}
 }

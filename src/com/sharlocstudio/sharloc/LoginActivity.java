@@ -141,6 +141,7 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void login(View view) {
 		SHAHasher hasher = new SHAHasher();
 		String email = uEmail.getText().toString();
@@ -150,8 +151,7 @@ public class LoginActivity extends Activity {
 		params.add(new BasicNameValuePair("tag", "login"));
 		params.add(new BasicNameValuePair("email", email));
 		params.add(new BasicNameValuePair("password", password));
-		Intent intent = new Intent(this, MainActivity.class);
-		LoginServerComm loginComm = new LoginServerComm(intent, this);
+		LoginServerComm loginComm = new LoginServerComm(this);
 		loginComm.execute(params);
 	}
 	

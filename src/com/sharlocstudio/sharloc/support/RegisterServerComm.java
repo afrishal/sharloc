@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
 import com.sharlocstudio.sharloc.LoginActivity;
+import com.sharlocstudio.sharloc.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,17 +18,15 @@ public class RegisterServerComm extends
 		AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
-	private Intent homeIntent;
 	private Activity registerActivity;
 
-	public RegisterServerComm(Intent intent, Activity activity) {
-		homeIntent = intent;
+	public RegisterServerComm(Activity activity) {
 		registerActivity = activity;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		
+
 	}
 
 	@Override
@@ -39,38 +38,41 @@ public class RegisterServerComm extends
 
 	@Override
 	protected void onPostExecute(JSONObject result) {
-		Log.i("JSON", result.toString());
 		try {
-			if (result.getString("success") != null) {
-				String res = result.getString("success");
-				if (Integer.parseInt(res) == 1) {
-					String message = result.getString("message");
-					JSONObject user = result.getJSONObject("user");
-					String name = user.getString("name");
-					String email = user.getString("email");
-					String longitude = user.getString("longitude");
-					String latitude = user.getString("latitude");
-					String lastUpdate = user.getString("last_update");
-					homeIntent.putExtra("name", name);
-					homeIntent.putExtra("email", email);
-					homeIntent.putExtra("longitude", longitude);
-					homeIntent.putExtra("latitude", latitude);
-					homeIntent.putExtra("lastUpdate", lastUpdate);
-					registerActivity.startActivity(homeIntent);
-					registerActivity.finish();
-					LoginActivity.loginActivity.finish();
-				} else {
-					// handle if error
-					Toast.makeText(registerActivity,
-							result.getString("message"), Toast.LENGTH_SHORT)
-							.show();
+			if (result != null) {
+				Log.i("JSON", result.toString());
+				if (result.getString("success") != null) {
+					String res = result.getString("success");
+					if (Integer.parseInt(res) == 1) {
+						JSONObject user = result.getJSONObject("user");
+						String name = user.getString("name");
+						String email = user.getString("email");
+						String longitude = user.getString("longitude");
+						String latitude = user.getString("latitude");
+						String lastUpdate = user.getString("last_update");
+						Intent homeIntent = new Intent(registerActivity, MainActivity.class);
+						homeIntent.putExtra("name", name);
+						homeIntent.putExtra("email", email);
+						homeIntent.putExtra("longitude", longitude);
+						homeIntent.putExtra("latitude", latitude);
+						homeIntent.putExtra("lastUpdate", lastUpdate);
+						registerActivity.startActivity(homeIntent);
+						registerActivity.finish();
+						LoginActivity.loginActivity.finish();
+					} else {
+						// handle if error
+						Toast.makeText(registerActivity,
+								result.getString("message"), Toast.LENGTH_SHORT)
+								.show();
 
+					}
 				}
 			} else {
+				Toast.makeText(registerActivity, "Failed to Connect Server", Toast.LENGTH_SHORT).show();
 				Log.e("login", "json error");
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			cancel(true);
 		}
 	}
 

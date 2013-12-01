@@ -5,25 +5,22 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
+import com.sharlocstudio.sharloc.MainActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class BroadcastLocationServerComm extends
+public class AddFriendServerComm extends
 		AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
-	private Activity homeActivity;
+	private Activity addActivity;
 
-	public BroadcastLocationServerComm(Activity activity) {
-		homeActivity = activity;
-	}
-
-	@Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		super.onPreExecute();
+	public AddFriendServerComm(Activity activity) {
+		addActivity = activity;
 	}
 
 	@Override
@@ -39,17 +36,19 @@ public class BroadcastLocationServerComm extends
 			if (result != null) {
 				Log.i("JSON", result.toString());
 				if (result.getString("success") != null) {
-					Toast.makeText(homeActivity, result.getString("message"),
+					Toast.makeText(addActivity, result.getString("message"),
 							Toast.LENGTH_SHORT).show();
-				} else {
-					Log.e("login", "json error");
+					Intent intent = new Intent(addActivity, MainActivity.class);
+					addActivity.startActivity(intent);
+					addActivity.finish();
 				}
 			} else {
-				Toast.makeText(homeActivity, "Failed to Connect Server", Toast.LENGTH_SHORT).show();
+				Toast.makeText(addActivity, "Failed to Connect Server",
+						Toast.LENGTH_SHORT).show();
+				Log.e("login", "json error");
 			}
 		} catch (Exception e) {
-			cancel(true);
+
 		}
 	}
-
 }
