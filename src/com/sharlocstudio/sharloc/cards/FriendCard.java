@@ -73,9 +73,9 @@ public class FriendCard extends Card{
 		addCardHeader(header);
 		
 		//Harusnya di bawah ini bisa nge-add gambar
-		CardThumbnail cardThumbnail = new CardThumbnail(context);
+		/*CardThumbnail cardThumbnail = new CardThumbnail(context);
 		cardThumbnail.setUrlResource(resourceUrlThumbnail);
-        addCardThumbnail(cardThumbnail);
+        addCardThumbnail(cardThumbnail);*/
 		
 		header.setPopupMenu(R.menu.menu_card_friend, new CardHeader.OnClickCardHeaderPopupMenuListener() {
             @Override
