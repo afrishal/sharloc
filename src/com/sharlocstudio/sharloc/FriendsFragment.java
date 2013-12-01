@@ -55,8 +55,7 @@ public class FriendsFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
 		
-		friendList = loadFriend();
-		initCards();
+		loadFriend();
 	}
 	
 	@Override
@@ -65,7 +64,7 @@ public class FriendsFragment extends Fragment {
 	    super.onCreateOptionsMenu(menu,inflater);
 	}
 	
-	public void initCards(){
+	public void initCards(ArrayList<User> friendList){
 		/*//card nomor 1
 		Card card = new Card(getActivity().getApplicationContext(), R.layout.card_friend);
 		//Card card = new Card(getActivity().getApplicationContext());
@@ -139,24 +138,13 @@ public class FriendsFragment extends Fragment {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private ArrayList<User> loadFriend() {
-		InputStream is;
-		ArrayList<User> friendList = null;
-		try {
-			is = new BufferedInputStream(new FileInputStream(new File(getActivity().getFilesDir() + "/" + Friends.FILE_NAME)));
-			friendList = Friends.getFriendList(is);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return friendList;
+	private void loadFriend() {
+		// load friend from server
+		LoadFriendServerComm loadFriendSC = new LoadFriendServerComm(this, getActivity());
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "load_friend"));
+		params.add(new BasicNameValuePair("email", getUserEmail()));
+		loadFriendSC.execute(params);
 		
 	}
 	

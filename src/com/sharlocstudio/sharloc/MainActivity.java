@@ -122,12 +122,7 @@ public class MainActivity extends FragmentActivity {
 			}
 		}
 		
-		// load friend from server
-		LoadFriendServerComm loadFriendSC = new LoadFriendServerComm(this);
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("tag", "load_friend"));
-		params.add(new BasicNameValuePair("email", getUserEmail()));
-		loadFriendSC.execute(params);
+		
 
 		// check play service
 		context = getApplicationContext();

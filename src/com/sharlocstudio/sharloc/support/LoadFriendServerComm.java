@@ -1,5 +1,9 @@
 package com.sharlocstudio.sharloc.support;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +12,12 @@ import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sharlocstudio.sharloc.FriendsFragment;
 import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -22,10 +28,11 @@ public class LoadFriendServerComm extends
 
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
 	private Activity homeActivity;
-	private boolean done = false;
+	private FriendsFragment friendsFragment;
 
-	public LoadFriendServerComm(Activity activity) {
+	public LoadFriendServerComm(FriendsFragment fragment, Activity activity) {
 		homeActivity = activity;
+		friendsFragment = fragment;
 	}
 
 	@Override
@@ -63,7 +70,10 @@ public class LoadFriendServerComm extends
 						Friends friendManager = new Friends(friendList);
 						friendManager.saveFriends(homeActivity.openFileOutput(
 								Friends.FILE_NAME, Context.MODE_PRIVATE));
-						done = true;
+						
+						InputStream is = new BufferedInputStream(new FileInputStream(new File(homeActivity.getFilesDir() + "/" + Friends.FILE_NAME)));
+						friendList = Friends.getFriendList(is);
+						friendsFragment.initCards(friendList);
 					} else {
 						// handle if error
 						Toast.makeText(homeActivity,
@@ -79,10 +89,6 @@ public class LoadFriendServerComm extends
 		} catch (Exception e) {
 			cancel(true);
 		}
-	}
-	
-	public boolean isDone() {
-		return done;
 	}
 
 }
