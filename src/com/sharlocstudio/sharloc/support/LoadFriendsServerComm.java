@@ -18,6 +18,7 @@ import com.sharlocstudio.sharloc.model.User;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -29,10 +30,18 @@ public class LoadFriendsServerComm extends
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
 	private Activity homeActivity;
 	private FriendsFragment friendsFragment;
+	private ProgressDialog progDialog;
 
 	public LoadFriendsServerComm(FriendsFragment fragment, Activity activity) {
 		homeActivity = activity;
 		friendsFragment = fragment;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		progDialog = new ProgressDialog(homeActivity,ProgressDialog.STYLE_HORIZONTAL);
+		progDialog.setMessage("Loading Friend List");
+		progDialog.show();
 	}
 
 	@Override
@@ -74,6 +83,7 @@ public class LoadFriendsServerComm extends
 						InputStream is = new BufferedInputStream(new FileInputStream(new File(homeActivity.getFilesDir() + "/" + Friends.FILE_NAME)));
 						friendList = Friends.getFriendList(is);
 						friendsFragment.initCards(friendList);
+						progDialog.dismiss();
 					} else {
 						// handle if error
 						Toast.makeText(homeActivity,

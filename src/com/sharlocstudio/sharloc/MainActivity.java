@@ -258,7 +258,7 @@ public class MainActivity extends FragmentActivity {
 			createAddFriendDialog();
 			break;
 		case R.id.action_refresh_friend:
-			Toast.makeText(this, "Refresh List", Toast.LENGTH_SHORT).show();
+			FriendsFragment.friendsFragment.refreshFriendList();
 			break;
 		}
 
