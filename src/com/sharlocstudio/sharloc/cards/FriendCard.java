@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.sharlocstudio.sharloc.FriendsFragment;
+import com.sharlocstudio.sharloc.LocateOnMapActivity;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.support.RemoveFriendServerComm;
 import com.sharlocstudio.sharloc.support.RequestLocationServerComm;
@@ -14,6 +15,7 @@ import com.sharlocstudio.sharloc.support.RequestLocationServerComm;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.MenuItem;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
@@ -82,6 +84,13 @@ public class FriendCard extends Card{
             public void onMenuItemClick(BaseCard card, MenuItem item) {
                 //Toast.makeText(getActivity().getApplicationContext(), "Click on card menu" + mTitleHeader +" item=" +  item.getTitle(), Toast.LENGTH_SHORT).show();
             	switch (item.getItemId()){
+            	case R.id.menu_friend_show_location:
+            		//pass object friend
+            		Intent intent = new Intent(context, LocateOnMapActivity.class);
+            		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //jangan hapus baris ini, dipake karna mau panggil kelas activity dari kelas non-activity
+            		context.startActivity(intent);
+            		
+            		break;
             	case R.id.menu_friend_request_location:
             		requestLocation();
             		break;

@@ -38,8 +38,9 @@
     <string name="emailDummy1">yehezkiel.chrisby@gmail.com</string>
 
     <!-- Strings for friend fragment -->
+    <string name="friend_show_location">Locate On Map</string>
     <string name="friend_request_location">Request Location</string>
-    <string name="friend_delete">Delete Contact</string>
+    <string name="friend_delete">Delete Friend</string>
     <string name="contact_add_method_qr_code">Add using Barcode Scanner</string>
     <string name="contact_add_method_nfc">Add using NFC</string>
     <string name="qr_code_description">Scan your friend\'s QR Code</string>
@@ -67,5 +68,6 @@
     <string name="login_password_hint">Password</string>
     <string name="login_login_button_label">Login</string>
     <string name="login_register_button_label">Create an Account</string>
+    <string name="title_activity_locate_on_map">Map</string>
 
 </resources>
