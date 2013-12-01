@@ -1,5 +1,6 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,10 @@ import com.sharlocstudio.sharloc.support.LoadFriendsServerComm;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FriendsFragment extends Fragment {
+	
+	private List<Address> list;
 	
 	public static FriendsFragment friendsFragment;
 	
@@ -88,7 +94,7 @@ public class FriendsFragment extends Fragment {
 			friendCard.setCardHeader(friend.getName());
 			friendCard.setFragment(this);
 			friendCard.setFriendEmail(friend.getEmail());
-			friendCard.setCardContent(friend.getLongitude() + ", " + friend.getLatitude());
+			friendCard.setCardContent(getCity(friend.getLatitude(),friend.getLongitude()));
 			friendCard.createCard();
 			friendCards.add(friendCard);
 		}
@@ -125,6 +131,29 @@ public class FriendsFragment extends Fragment {
 			friendCardListView.setAdapter(friendCardArrayAdapter);
 		}
 		
+	}
+	
+	private String getCity(String lat, String longi) {
+		
+		double latitude = Double.parseDouble(lat);
+		double longitude = Double.parseDouble(longi);
+		
+		try {
+			Geocoder geo = new Geocoder(getActivity().getApplicationContext());
+			list = geo.getFromLocation(latitude, longitude, 1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Log.i("LOCATION", list.get(0).getLocality());
+		
+		if (list.size() != 0) {
+
+			return list.get(0).getLocality();
+		}
+
+		return "";
+
 	}
 	
 	@SuppressWarnings("unchecked")
