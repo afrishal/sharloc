@@ -67,6 +67,11 @@ public class Friends {
 	    fos.close();
 	}
 	
+	/*
+	 * InputStream is = new BufferedInputStream(new FileInputStream(new File(homeActivity.getFilesDir() + "/" + Friends.FILE_NAME)));
+	 * ArrayList<User> friendList = Friends.getFriendList(is);
+	 */
+	
 	public static ArrayList<User> getFriendList(InputStream is) throws XmlPullParserException, IOException {
 		User user = null;
 		String text = null;

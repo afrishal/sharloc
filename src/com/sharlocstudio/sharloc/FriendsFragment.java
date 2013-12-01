@@ -11,7 +11,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
 import com.sharlocstudio.sharloc.model.User;
-import com.sharlocstudio.sharloc.support.LoadFriendServerComm;
+import com.sharlocstudio.sharloc.support.LoadFriendsServerComm;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -130,7 +130,7 @@ public class FriendsFragment extends Fragment {
 	@SuppressWarnings("unchecked")
 	private void loadFriend() {
 		// load friend from server
-		LoadFriendServerComm loadFriendSC = new LoadFriendServerComm(this, getActivity());
+		LoadFriendsServerComm loadFriendSC = new LoadFriendsServerComm(this, getActivity());
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", "load_friend"));
 		params.add(new BasicNameValuePair("email", getUserEmail()));

@@ -70,11 +70,15 @@ public class MainActivity extends FragmentActivity {
 	private String[] drawerMenuArray;
 	private Intent intent;
 	private User user;
+	
+	public static MainActivity mainActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		mainActivity = this;
 
 		// atur nama action bar pertama kali jadi langsung "home"
 		getActionBar().setTitle(

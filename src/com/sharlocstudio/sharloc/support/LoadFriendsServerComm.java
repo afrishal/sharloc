@@ -23,14 +23,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class LoadFriendServerComm extends
+public class LoadFriendsServerComm extends
 		AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 	private String serverURL = "http://frishproject.bl.ee/sharlocserver/service.php";
 	private Activity homeActivity;
 	private FriendsFragment friendsFragment;
 
-	public LoadFriendServerComm(FriendsFragment fragment, Activity activity) {
+	public LoadFriendsServerComm(FriendsFragment fragment, Activity activity) {
 		homeActivity = activity;
 		friendsFragment = fragment;
 	}

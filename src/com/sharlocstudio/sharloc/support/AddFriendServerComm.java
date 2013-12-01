@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
-import com.sharlocstudio.sharloc.FriendsFragment;
 import com.sharlocstudio.sharloc.MainActivity;
 
 import android.app.Activity;
