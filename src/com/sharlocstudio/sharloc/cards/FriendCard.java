@@ -17,12 +17,14 @@ import android.content.DialogInterface;
 import android.view.MenuItem;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 public class FriendCard extends Card{
 	private Context context; //pengganti getActivity().getApplicationContext()
 	protected String mTitleHeader; //jadi nama teman
 	protected String mTitleMain; //jadi data lokasi akhir
+	protected String resourceUrlThumbnail;
 	protected String friendEmail;
 	protected FriendsFragment friendsFragment;
 	
@@ -41,6 +43,10 @@ public class FriendCard extends Card{
 	
 	public void setCardContent(String text) {
 		this.mTitleMain = text;
+	}
+	
+	public void setCardThumbnailResUrl(String resourceUrlThumbnail) {
+		this.resourceUrlThumbnail = resourceUrlThumbnail;
 	}
 	
 	public void setFragment(FriendsFragment fragment) {
@@ -65,6 +71,11 @@ public class FriendCard extends Card{
 		
 		//Add the header
 		addCardHeader(header);
+		
+		//Harusnya di bawah ini bisa nge-add gambar
+		CardThumbnail cardThumbnail = new CardThumbnail(context);
+		cardThumbnail.setUrlResource(resourceUrlThumbnail);
+        addCardThumbnail(cardThumbnail);
 		
 		header.setPopupMenu(R.menu.menu_card_friend, new CardHeader.OnClickCardHeaderPopupMenuListener() {
             @Override

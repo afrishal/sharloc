@@ -14,7 +14,8 @@
 	    android:fontFamily="sans-serif-semibold"
 	    android:textStyle="italic" />
 	
-	<TextView 
+	<!-- 
+	<ImageView 
 	    android:id="@+id/maps"
 	    android:layout_marginTop="5dp"
 	    android:layout_marginLeft="0dp"
@@ -22,6 +23,7 @@
 	    android:background="@color/sharloc_selector"
 	    android:layout_width="match_parent"
 	    android:layout_height="125dp" />
+	     -->
    
 
 </LinearLayout>
