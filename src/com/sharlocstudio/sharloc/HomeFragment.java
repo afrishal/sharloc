@@ -30,11 +30,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements OnClickListener {
 
@@ -45,7 +47,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private double myLong;
 	private LatLng myPosition;
 	SupportMapFragment sMapFragment;
-	List<Address> list;
+	List<Address> list = new ArrayList<Address>();
 	private Card card;
 	private CardView cardView;
 
@@ -186,6 +188,14 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	}
 
 	private String getAddress(Location myPosition) {
+
+		if (googleMap.getMyLocation() != null) {
+
+			myPosition = googleMap.getMyLocation();
+		} else {
+			myPosition.setLatitude(myLat);
+			myPosition.setLongitude(myLong);
+		}
 		try {
 			Geocoder geo = new Geocoder(getActivity().getApplicationContext());
 			list = geo.getFromLocation(myPosition.getLatitude(),
@@ -194,14 +204,25 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		Log.i("CURRENT_LOC", "location: " + myPosition.getLatitude() + ", "
+				+ myPosition.getLongitude());
+
+		Log.i("VARIABLES", "" + myLat + ", " + myLong);
+
+		Log.i("ADDRESS_SIZE", "list.size = " + list.size());
+
 		if (list.size() != 0) {
 
 			return list.get(0).getAddressLine(0) + ", "
 					+ list.get(0).getLocality() + ", "
 					+ list.get(0).getCountryName();
-		}
-		return "Unable to get current location";
 
+		} else {
+			Toast.makeText(getActivity().getApplicationContext(),
+					"Coordinates set", Toast.LENGTH_SHORT).show();
+			return "Unable to get current address";
+		}
 	}
 
 	@SuppressWarnings("unchecked")
