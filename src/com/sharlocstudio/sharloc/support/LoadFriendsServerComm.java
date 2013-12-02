@@ -32,16 +32,24 @@ public class LoadFriendsServerComm extends
 	private FriendsFragment friendsFragment;
 	private ProgressDialog progDialog;
 
+	public LoadFriendsServerComm(Activity activity) {
+		homeActivity = activity;
+		friendsFragment = null;
+	}
+
 	public LoadFriendsServerComm(FriendsFragment fragment, Activity activity) {
 		homeActivity = activity;
 		friendsFragment = fragment;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
-		progDialog = new ProgressDialog(homeActivity,ProgressDialog.STYLE_HORIZONTAL);
+
+		progDialog = new ProgressDialog(homeActivity,
+				ProgressDialog.STYLE_HORIZONTAL);
 		progDialog.setMessage("Loading Friend List");
 		progDialog.show();
+
 	}
 
 	@Override
@@ -79,22 +87,29 @@ public class LoadFriendsServerComm extends
 						Friends friendManager = new Friends(friendList);
 						friendManager.saveFriends(homeActivity.openFileOutput(
 								Friends.FILE_NAME, Context.MODE_PRIVATE));
-						
-						InputStream is = new BufferedInputStream(new FileInputStream(new File(homeActivity.getFilesDir() + "/" + Friends.FILE_NAME)));
-						friendList = Friends.getFriendList(is);
-						friendsFragment.initCards(friendList);
+						if (friendsFragment != null) {
+							InputStream is = new BufferedInputStream(
+									new FileInputStream(new File(
+											homeActivity.getFilesDir() + "/"
+													+ Friends.FILE_NAME)));
+							friendList = Friends.getFriendList(is);
+							friendsFragment.initCards(friendList);
+						}
 						progDialog.dismiss();
+
 					} else {
 						// handle if error
 						Toast.makeText(homeActivity,
 								result.getString("message"), Toast.LENGTH_SHORT)
 								.show();
+						progDialog.dismiss();
 					}
 				}
 			} else {
 				Toast.makeText(homeActivity, "Failed to Connect Server",
 						Toast.LENGTH_SHORT).show();
 				Log.e("loadFriend", "json error");
+				progDialog.dismiss();
 			}
 		} catch (Exception e) {
 			cancel(true);

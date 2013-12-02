@@ -9,8 +9,11 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,6 +24,7 @@ import com.sharlocstudio.sharloc.activities.QRCodeActivity;
 import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.GcmIntentService;
+import com.sharlocstudio.sharloc.support.LoadFriendsServerComm;
 import com.sharlocstudio.sharloc.support.RegisterGCMServerComm;
 
 import android.os.Bundle;
@@ -47,7 +51,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -112,6 +115,8 @@ public class MainActivity extends FragmentActivity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			loadFriend(email);
 			
 		} else {
 			try {
@@ -490,6 +495,23 @@ public class MainActivity extends FragmentActivity {
 				});
 		AlertDialog dialog = builder.create();
 		dialog.show();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void loadFriend(String email) {
+		// load friend from server
+		LoadFriendsServerComm loadFriendSC = new LoadFriendsServerComm(this);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "load_friend"));
+		params.add(new BasicNameValuePair("email", email));
+		loadFriendSC.execute(params);
+	}
+	
+	public String getUserEmail() {
+		// get email from shared prefs
+		SharedPreferences sharedPref = getSharedPreferences("userData", 0);
+		String email = sharedPref.getString("email", "");
+		return email;
 	}
 
 }
