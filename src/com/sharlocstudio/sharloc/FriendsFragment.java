@@ -168,7 +168,6 @@ public class FriendsFragment extends Fragment {
 		params.add(new BasicNameValuePair("tag", "load_friend"));
 		params.add(new BasicNameValuePair("email", getUserEmail()));
 		loadFriendSC.execute(params);
-		
 	}
 	
 	public String getUserEmail() {
@@ -193,7 +192,7 @@ public class FriendsFragment extends Fragment {
 		long diffMinutes = diff / (60 * 1000) % 60;
 		long diffHours = diff / (60 * 60 * 1000) % 24;
 		long diffDays = diff / (24 * 60 * 60 * 1000) % 7;
-		long diffWeeks = diff / (7 * 24 * 60 * 1000) % 4;
+		long diffWeeks = diff / (7 * 24 * 60 * 60 * 1000) % 4;
 		long diffMonths = (diff / (7 * 24 * 60 * 1000)) / 30;
 			
 		if (diffMonths > 0) {

@@ -226,7 +226,7 @@ public class NearMeFragment extends Fragment {
 		long diffMinutes = diff / (60 * 1000) % 60;
 		long diffHours = diff / (60 * 60 * 1000) % 24;
 		long diffDays = diff / (24 * 60 * 60 * 1000) % 7;
-		long diffWeeks = diff / (7 * 24 * 60 * 1000) % 4;
+		long diffWeeks = diff / (7 * 24 * 60 * 60 * 1000) % 4;
 		long diffMonths = (diff / (7 * 24 * 60 * 1000)) / 30;
 			
 		if (diffMonths > 0) {
