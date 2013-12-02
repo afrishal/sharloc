@@ -1,5 +1,6 @@
 package com.sharlocstudio.sharloc;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,12 +33,16 @@ public class LocateOnMapActivity extends Activity {
 		try {
 			// Loading map
 			initilizeMap();
-			addMarker(userName, latitude, longitude);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		addMarker(userName, latitude, longitude);
+
+		LatLng friendPosition = new LatLng(latitude, longitude);
+
+		googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+				friendPosition, 16.0f));
 	}
 
 	@Override
