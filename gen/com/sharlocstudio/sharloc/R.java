@@ -402,7 +402,7 @@ containing a value of this type.
         public static final int login_progress_bar=0x7f05000c;
         public static final int login_register=0x7f050010;
         public static final int map=0x7f050009;
-        public static final int maps=0x7f050027;
+        public static final int maps_bitmap=0x7f050027;
         public static final int menu_friend_delete=0x7f050046;
         public static final int menu_friend_request_location=0x7f050045;
         public static final int menu_friend_show_location=0x7f050044;

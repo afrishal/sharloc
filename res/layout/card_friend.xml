@@ -2,28 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:orientation="vertical"
-     >
-     <!-- tadinya android:layout_height="160dp" -->
-    
-	<!-- Use same ID to use built-in features -->
-	<TextView
-	    android:id="@+id/card_main_inner_simple_title"
-	    android:layout_marginLeft="10dp"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:fontFamily="sans-serif-semibold"
-	    android:textStyle="italic" />
-	
-	<TextView 
-	    android:id="@+id/maps"
-	    android:layout_marginTop="5dp"
-	    android:layout_marginLeft="0dp"
-	    android:layout_marginRight="0dp"
-	    android:background="@color/sharloc_selector"
-	    android:layout_width="match_parent"
-	    android:layout_height="125dp" />
-	
-   
+    android:orientation="vertical" >
+
+    <!-- Use same ID to use built-in features -->
+
+    <TextView
+        android:id="@+id/card_main_inner_simple_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif-semibold"
+        android:textStyle="italic" />
+
+    <ImageView
+        android:id="@+id/maps_bitmap"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/sharloc_selector" />
 
 </LinearLayout>

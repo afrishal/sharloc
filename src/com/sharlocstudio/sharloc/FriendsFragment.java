@@ -51,6 +51,7 @@ public class FriendsFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
 		
+		//initCards();
 		loadFriend();
 	}
 	
@@ -61,6 +62,7 @@ public class FriendsFragment extends Fragment {
 	}
 	
 	public void initCards(ArrayList<User> friendList){
+	//public void initCards(){
 		/*//card nomor 1
 		Card card = new Card(getActivity().getApplicationContext(), R.layout.card_friend);
 		//Card card = new Card(getActivity().getApplicationContext());

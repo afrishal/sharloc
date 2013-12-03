@@ -16,21 +16,27 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 public class FriendCard extends Card{
+	
+	private Bitmap bitmap;
 	private Context context; //pengganti getActivity().getApplicationContext()
 	protected String mTitleHeader; //jadi nama teman
 	protected String mTitleMain; //jadi data lokasi akhir
 	protected String resourceUrlThumbnail;
 	protected String friendEmail;
-	protected FriendsFragment friendsFragment;
 	protected String friendLatitude;
 	protected String friendLongitude;
+	protected FriendsFragment friendsFragment;
 	
 	public FriendCard(Context context) {
 		super(context, R.layout.card_friend);
@@ -49,8 +55,12 @@ public class FriendCard extends Card{
 		this.mTitleMain = text;
 	}
 	
-	public void setCardThumbnailResUrl(String resourceUrlThumbnail) {
-		this.resourceUrlThumbnail = resourceUrlThumbnail;
+//	public void setCardThumbnailResUrl(String resourceUrlThumbnail) {
+//		this.resourceUrlThumbnail = resourceUrlThumbnail;
+//	}
+	
+	public void setCardImageBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
 	}
 	
 	public void setFragment(FriendsFragment fragment) {
@@ -132,10 +142,21 @@ public class FriendCard extends Card{
         });
 		
 		//Set card title (content)
-		setTitle(mTitleMain);
+		//setTitle(mTitleMain);
 		
 		//Card cannot be swiped
 		setSwipeable(false);
+	}
+	
+	@Override
+	public void setupInnerViewElements(ViewGroup parent, View view) {
+		TextView textView = (TextView) view.findViewById(R.id.card_main_inner_simple_title);
+		textView.setText(mTitleMain);
+		
+		ImageView imageView = (ImageView) view.findViewById(R.id.maps_bitmap);
+		imageView.setImageResource(R.drawable.logo_developer); //GAMBAR DUMMY, HAPUS AJA NANTI
+		imageView.setImageBitmap(bitmap); //GANTI BITMAP DI SINI (set dulu objek bitmap-nya pake method setCardImageBitmap(Bitmap bitmap) di atas)
+		
 	}
 	
 	@SuppressWarnings("unchecked")

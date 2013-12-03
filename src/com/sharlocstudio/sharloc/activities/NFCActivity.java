@@ -8,8 +8,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.sharlocstudio.sharloc.support.AddFriendServerComm;
 import com.sharlocstudio.sharloc.support.NfcUtils;
-import com.sharlocstudio.sharloc.FriendsFragment;
-import com.sharlocstudio.sharloc.MainActivity;
 import com.sharlocstudio.sharloc.R;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;

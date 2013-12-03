@@ -201,7 +201,7 @@ int id login_password 0x7f05000e
 int id login_progress_bar 0x7f05000c
 int id login_register 0x7f050010
 int id map 0x7f050009
-int id maps 0x7f050027
+int id maps_bitmap 0x7f050027
 int id menu_friend_delete 0x7f050046
 int id menu_friend_request_location 0x7f050045
 int id menu_friend_show_location 0x7f050044

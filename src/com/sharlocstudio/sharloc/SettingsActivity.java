@@ -1,7 +1,6 @@
 package com.sharlocstudio.sharloc;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
