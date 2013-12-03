@@ -3,10 +3,12 @@
     
 	<style name="Theme.SharlocAppTheme" parent="@android:Theme.Holo.Light">   
 		<item name="android:actionBarStyle">@style/Theme.SharlocAppTheme.ActionBar</item>
+		<item name="android:animateLayoutChanges">true</item>
 	</style>
 	
 	<style name="Theme.SharlocAppTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">#007EA9</item>
+        <item name="android:animateLayoutChanges">true</item>
     </style>
 	
     
