@@ -172,16 +172,13 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	}
 
 	public void initCard() {
-		// card nomor 1
-		// Card card = new
-		// Card(getActivity().getApplicationContext(),R.layout.card_friend);
 		card = new Card(getActivity().getApplicationContext());
 		CardHeader cardHeader = new CardHeader(getActivity()
 				.getApplicationContext());
 		cardHeader.setTitle(getResources().getString(
 				R.string.label_current_location));
 		card.addCardHeader(cardHeader);
-		card.setTitle("Press Broadcast Location to share your location");
+		card.setTitle(getResources().getString(R.string.broadcast_direction));
 		cardView = (CardView) getActivity().findViewById(
 				R.id.card_current_location);
 		cardView.setCard(card);
@@ -201,7 +198,6 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			list = geo.getFromLocation(myPosition.getLatitude(),
 					myPosition.getLongitude(), 1);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -55,26 +54,19 @@ import android.widget.SimpleAdapter;
 public class MainActivity extends FragmentActivity {
 
 	public static final String EXTRA_MESSAGE = "message";
-
+	public static MainActivity mainActivity;
 	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
-	GoogleCloudMessaging gcm;
-	AtomicInteger msgId = new AtomicInteger();
-	SharedPreferences prefs;
-	Context context;
-	String regId;
-
+	private GoogleCloudMessaging gcm;
+	private Context context;
+	private String regId;
 	private DrawerLayout sharlocDrawerLayout; //
 	private ListView drawerListView;
 	private ActionBarDrawerToggle sharlocBarDrawerToggle; //
-
 	private CharSequence barDrawerTitle;
 	private CharSequence barTitle;
 	private String[] drawerMenuArray;
 	private Intent intent;
 	private User user;
-
-	public static MainActivity mainActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +107,9 @@ public class MainActivity extends FragmentActivity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			loadFriend(email);
-			
+
 		} else {
 			try {
 				user = getUserProfile();
@@ -229,7 +221,6 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	// apalah ini
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -254,7 +245,7 @@ public class MainActivity extends FragmentActivity {
 		// Handle action buttons
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			//Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
 			intent = new Intent(MainActivity.this, SettingsActivity.class);
 			startActivity(intent);
 			break;
@@ -291,29 +282,19 @@ public class MainActivity extends FragmentActivity {
 				listItem, R.layout.dialog_add_friend_method, new String[] {
 						"method_icon", "method_label" }, new int[] {
 						R.id.method_icon, R.id.method_label });
-
-		// Setting up dialog box
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
 		builder.setTitle("Choose method").setAdapter(meths,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						// Intent intent;
-						// The 'which' argument contains the index position
-						// of the selected item
 						switch (which) {
 						case 0:
-							// Toast.makeText(MainActivity.this, "QR Code!",
-							// Toast.LENGTH_LONG).show();
-							// flow add temen pake qr code masukin di sini
 							intent = new Intent(MainActivity.this,
 									QRCodeActivity.class);
 							startActivity(intent);
 							break;
 						case 1:
-							// Toast.makeText(MainActivity.this, "NFC!",
-							// Toast.LENGTH_LONG).show();
-							// flow add temen pake nfc masukin di sini
 							intent = new Intent(MainActivity.this,
 									NFCActivity.class);
 							startActivity(intent);
@@ -362,7 +343,6 @@ public class MainActivity extends FragmentActivity {
 
 		switch (position) {
 		case 0:
-			// commit2 fragmentManager-nya
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, homeFragment).commit();
 			drawerListView.setItemChecked(position, true);
@@ -496,7 +476,7 @@ public class MainActivity extends FragmentActivity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void loadFriend(String email) {
 		// load friend from server
@@ -506,7 +486,7 @@ public class MainActivity extends FragmentActivity {
 		params.add(new BasicNameValuePair("email", email));
 		loadFriendSC.execute(params);
 	}
-	
+
 	public String getUserEmail() {
 		// get email from shared prefs
 		SharedPreferences sharedPref = getSharedPreferences("userData", 0);

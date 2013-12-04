@@ -55,10 +55,6 @@ public class FriendCard extends Card{
 		this.mTitleMain = text;
 	}
 	
-//	public void setCardThumbnailResUrl(String resourceUrlThumbnail) {
-//		this.resourceUrlThumbnail = resourceUrlThumbnail;
-//	}
-	
 	public void setCardImageBitmap(Bitmap bitmap) {
 		this.bitmap = bitmap;
 	}

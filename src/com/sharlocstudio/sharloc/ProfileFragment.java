@@ -56,7 +56,6 @@ public class ProfileFragment extends Fragment {
 		uEmail.setText(user.getEmail());
 		String qrInputText = user.getEmail();
 		
-				  
 		//Find screen size
 		WindowManager manager = (WindowManager) getActivity().getSystemService(getActivity().WINDOW_SERVICE);
 		Display display = manager.getDefaultDisplay();
@@ -83,10 +82,7 @@ public class ProfileFragment extends Fragment {
 		}
 		
 		return rootView;
-	}
-	
-	
-	
+	}	
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

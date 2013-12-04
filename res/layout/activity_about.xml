@@ -16,19 +16,22 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="70dp"
+        android:contentDescription="@string/cd_sharloc_about_logo"
         android:src="@drawable/logo_image" />
 
     <ImageView
         android:id="@+id/sharloc_about_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:contentDescription="@string/cd_sharloc_about_name"
         android:src="@drawable/logo_text" />
 
     <ImageView
         android:id="@+id/sharloc_about_tagline"
         android:layout_width="match_parent"
-        android:layout_marginTop="-10dp"
         android:layout_height="40dp"
+        android:layout_marginTop="-10dp"
+        android:contentDescription="@string/cd_sharloc_about_tagline"
         android:src="@drawable/logo_tagline"
         android:visibility="invisible" />
 
@@ -37,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_marginTop="120dp"
+        android:contentDescription="@string/cd_sharloc_about_developer"
         android:src="@drawable/logo_developer"
         android:visibility="invisible" />
 

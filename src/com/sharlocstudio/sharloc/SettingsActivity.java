@@ -19,8 +19,8 @@ import android.widget.ListView;
 
 public class SettingsActivity extends Activity {
 	
-	ListView menuListView;
-	String[] menuList;
+	private ListView menuListView;
+	private String[] menuList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +39,12 @@ public class SettingsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 				if(position == 0){
-					//Buka About
 					Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
 					startActivity(intent);
 				} else if (position == 1){
-					//Sign Out
 					logout();
 				}
-				
 			}
-			
 		});
 		
 	}
@@ -62,9 +58,9 @@ public class SettingsActivity extends Activity {
 	
 	public void logout() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure?").setTitle("Logout");
+		builder.setMessage(getResources().getString(R.string.sign_out_alert_message)).setTitle(getResources().getString(R.string.sign_out_alert_title));
 		// Add the buttons
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getResources().getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				File userFile = new File(getFilesDir() + "/" + User.FILE_NAME);
 				File friendsFile = new File(getFilesDir() + "/"
@@ -77,7 +73,7 @@ public class SettingsActivity extends Activity {
 				finish();
 			}
 		});
-		builder.setNegativeButton("Cancel",
+		builder.setNegativeButton(getResources().getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						// User cancelled the dialog

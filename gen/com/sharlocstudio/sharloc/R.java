@@ -204,12 +204,13 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f040006;
         public static final int common_signin_btn_light_text_focused=0x7f040007;
         public static final int common_signin_btn_light_text_pressed=0x7f040005;
-        public static final int common_signin_btn_text_dark=0x7f040014;
-        public static final int common_signin_btn_text_light=0x7f040015;
-        public static final int navdrawer_listviewselector=0x7f040016;
-        public static final int sharloc_background_activity=0x7f040012;
-        public static final int sharloc_background_login=0x7f040011;
-        public static final int sharloc_selector=0x7f040013;
+        public static final int common_signin_btn_text_dark=0x7f040015;
+        public static final int common_signin_btn_text_light=0x7f040016;
+        public static final int navdrawer_listviewselector=0x7f040017;
+        public static final int sharloc_action_bar=0x7f040011;
+        public static final int sharloc_background_activity=0x7f040013;
+        public static final int sharloc_background_login=0x7f040012;
+        public static final int sharloc_selector=0x7f040014;
         public static final int sharloc_theme=0x7f040010;
     }
     public static final class dimen {
@@ -491,16 +492,16 @@ containing a value of this type.
         public static final int list_card_undo_items=0x7f090000;
     }
     public static final class string {
-        public static final int accountDummy1=0x7f060031;
-        public static final int action_add_friend=0x7f06002e;
-        public static final int action_edit_profile=0x7f060030;
-        public static final int action_forgot_password=0x7f06004a;
-        public static final int action_refresh_friend=0x7f06002f;
+        public static final int accountDummy1=0x7f060034;
+        public static final int action_add_friend=0x7f060031;
+        public static final int action_edit_profile=0x7f060033;
+        public static final int action_forgot_password=0x7f060056;
+        public static final int action_refresh_friend=0x7f060032;
         /**  Strings for action menu 
          */
-        public static final int action_settings=0x7f060028;
-        public static final int action_sign_in_register=0x7f060048;
-        public static final int action_sign_in_short=0x7f060049;
+        public static final int action_settings=0x7f060029;
+        public static final int action_sign_in_register=0x7f060054;
+        public static final int action_sign_in_short=0x7f060055;
         /**  String for app settings 
          */
         public static final int app_name=0x7f06001a;
@@ -528,10 +529,24 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
-        public static final int button_broadcast_location=0x7f06002d;
+        public static final int broadcast_direction=0x7f060036;
+        public static final int button_broadcast_location=0x7f060030;
+        public static final int button_cancel=0x7f060051;
+        /**  String for alert dialog button 
+         */
+        public static final int button_ok=0x7f060050;
         /**  Strings for buttons login page 
          */
-        public static final int button_sign_in=0x7f06003b;
+        public static final int button_sign_in=0x7f06003f;
+        public static final int cd_maps_bitmap=0x7f06004f;
+        public static final int cd_sharloc_about_developer=0x7f06004e;
+        public static final int cd_sharloc_about_logo=0x7f06004b;
+        public static final int cd_sharloc_about_name=0x7f06004c;
+        public static final int cd_sharloc_about_tagline=0x7f06004d;
+        /**  Strnigs for content descriptions 
+         */
+        public static final int cd_sharloc_logo=0x7f060049;
+        public static final int cd_sharloc_name=0x7f06004a;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -603,63 +618,65 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int contact_add_method_nfc=0x7f060037;
-        public static final int contact_add_method_qr_code=0x7f060036;
-        public static final int drawer_close=0x7f06003d;
+        public static final int contact_add_method_nfc=0x7f06003b;
+        public static final int contact_add_method_qr_code=0x7f06003a;
+        public static final int drawer_close=0x7f060041;
         /**  Strings for navigation drawer 
          */
-        public static final int drawer_open=0x7f06003c;
-        public static final int emailDummy1=0x7f060032;
-        public static final int error_field_required=0x7f06004f;
-        public static final int error_incorrect_password=0x7f06004e;
-        public static final int error_invalid_email=0x7f06004c;
-        public static final int error_invalid_password=0x7f06004d;
-        public static final int friend_delete=0x7f060035;
-        public static final int friend_request_location=0x7f060034;
+        public static final int drawer_open=0x7f060040;
+        public static final int emailDummy1=0x7f060035;
+        public static final int error_field_required=0x7f06005b;
+        public static final int error_incorrect_password=0x7f06005a;
+        public static final int error_invalid_email=0x7f060058;
+        public static final int error_invalid_password=0x7f060059;
+        public static final int friend_delete=0x7f060039;
+        public static final int friend_request_location=0x7f060038;
         /**  Strings for friend fragment 
          */
-        public static final int friend_show_location=0x7f060033;
+        public static final int friend_show_location=0x7f060037;
         public static final int hello_world=0x7f06001d;
-        public static final int item_about=0x7f06002a;
+        public static final int item_about=0x7f06002b;
         /**  Strings for settings activity | KALO SETTINGS DIPENCET 
          */
-        public static final int item_help=0x7f060029;
-        public static final int item_sign_out=0x7f06002b;
+        public static final int item_help=0x7f06002a;
+        public static final int item_sign_out=0x7f06002c;
         /**  String for home fragment 
          */
-        public static final int label_current_location=0x7f06002c;
+        public static final int label_current_location=0x7f06002f;
         /**  Undo Controller
          */
         public static final int list_card_undo_title=0x7f06001b;
-        public static final int login_email_hint=0x7f06003f;
-        public static final int login_login_button_label=0x7f060041;
-        public static final int login_password_hint=0x7f060040;
-        public static final int login_progress_signing_in=0x7f06004b;
-        public static final int login_register_button_label=0x7f060042;
-        public static final int nfc_description=0x7f060039;
+        public static final int login_email_hint=0x7f060043;
+        public static final int login_login_button_label=0x7f060045;
+        public static final int login_password_hint=0x7f060044;
+        public static final int login_progress_signing_in=0x7f060057;
+        public static final int login_register_button_label=0x7f060046;
+        public static final int nfc_description=0x7f06003d;
         /**  Strings for profile fragment 
          */
-        public static final int profile_qrcode_label=0x7f06003a;
+        public static final int profile_qrcode_label=0x7f06003e;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f060046;
-        public static final int prompt_password=0x7f060047;
-        public static final int qr_code_description=0x7f060038;
-        public static final int registration_button_label=0x7f060027;
-        public static final int registration_email_label=0x7f060024;
+        public static final int prompt_email=0x7f060052;
+        public static final int prompt_password=0x7f060053;
+        public static final int qr_code_description=0x7f06003c;
+        public static final int registration_button_label=0x7f060028;
+        public static final int registration_email_label=0x7f060025;
         /**  String for registration page 
          */
-        public static final int registration_msg_failed=0x7f060022;
-        public static final int registration_name_label=0x7f060023;
-        public static final int registration_password_label=0x7f060025;
-        public static final int registration_password_reenter_label=0x7f060026;
-        public static final int title_activity_about=0x7f060045;
-        public static final int title_activity_locate_on_map=0x7f060043;
-        public static final int title_activity_login=0x7f06003e;
+        public static final int registration_msg_failed=0x7f060023;
+        public static final int registration_name_label=0x7f060024;
+        public static final int registration_password_label=0x7f060026;
+        public static final int registration_password_reenter_label=0x7f060027;
+        public static final int sign_out_alert_message=0x7f06002d;
+        public static final int sign_out_alert_title=0x7f06002e;
+        public static final int title_activity_about=0x7f060022;
+        public static final int title_activity_locate_on_map=0x7f060047;
+        public static final int title_activity_login=0x7f060042;
         public static final int title_activity_nfc=0x7f06001f;
         public static final int title_activity_qrcode=0x7f060020;
         public static final int title_activity_register=0x7f060021;
-        public static final int title_activity_settings=0x7f060044;
+        public static final int title_activity_settings=0x7f060048;
         /**  Dummy String 
          */
         public static final int yolo=0x7f06001c;
@@ -695,6 +712,8 @@ containing a value of this type.
         public static final int AppTheme=0x7f0a001b;
         public static final int Divider=0x7f0a001c;
         public static final int LoginFormContainer=0x7f0a001d;
+        /**  <item name="android:animateLayoutChanges">true</item> 
+         */
         public static final int Theme_SharlocAppTheme=0x7f0a001e;
         public static final int Theme_SharlocAppTheme_ActionBar=0x7f0a001f;
         public static final int card=0x7f0a0000;

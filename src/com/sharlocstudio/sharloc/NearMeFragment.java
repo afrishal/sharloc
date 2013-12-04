@@ -42,7 +42,7 @@ public class NearMeFragment extends Fragment {
 	private Bundle mBundle;
 	private double myLat;
 	private double myLong;
-	private LatLng myPosition = null;
+	private LatLng myPosition;
 	SupportMapFragment sMapFragment;
 
 	public NearMeFragment() {
@@ -54,11 +54,12 @@ public class NearMeFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_nearme, container,
 				false);
+		myPosition = null;
 
 		try {
 			MapsInitializer.initialize(getActivity());
 		} catch (GooglePlayServicesNotAvailableException e) {
-			// TODO handle this situation
+			
 		}
 
 		mMapView = (MapView) rootView.findViewById(R.id.map);
@@ -168,16 +169,13 @@ public class NearMeFragment extends Fragment {
 			is = new BufferedInputStream(new FileInputStream(new File(
 					getActivity().getFilesDir() + "/" + Friends.FILE_NAME)));
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			friendList = Friends.getFriendList(is);
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

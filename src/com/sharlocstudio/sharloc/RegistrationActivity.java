@@ -16,10 +16,10 @@ import android.widget.EditText;
 
 public class RegistrationActivity extends Activity {
 	
-	EditText uName;
-	EditText uEmail;
-	EditText uPass;
-	EditText uPassCnf;
+	private EditText uName;
+	private EditText uEmail;
+	private EditText uPass;
+	private EditText uPassCnf;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -21,6 +21,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="5dp"
-        android:background="@color/sharloc_selector" />
+        android:background="@color/sharloc_selector"
+        android:contentDescription="@string/cd_maps_bitmap" />
 
 </LinearLayout>
