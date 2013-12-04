@@ -1,16 +1,21 @@
 package com.sharlocstudio.sharloc;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
+
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
 import com.sharlocstudio.sharloc.model.User;
@@ -18,15 +23,19 @@ import com.sharlocstudio.sharloc.support.LoadFriendsServerComm;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class FriendsFragment extends Fragment {
 
@@ -43,7 +52,8 @@ public class FriendsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_friends, container,
 				false);
-		setHasOptionsMenu(true); // kasih tau kalo fragmen ini punya options menu sendiri
+		setHasOptionsMenu(true); // kasih tau kalo fragmen ini punya options
+									// menu sendiri
 
 		friendsFragment = this;
 		return rootView;
@@ -109,7 +119,7 @@ public class FriendsFragment extends Fragment {
 			friendCard.setCardContent(getCity(friend.getLatitude(),
 					friend.getLongitude())
 					+ ", " + getUpdateTime(friend));
-			friendCard.setCardImageBitmap(null); // SHOW
+			friendCard.setCardImageBitmap(getMapImage(friend)); // SHOW
 			friendCard.setFriendLatitude(friend.getLatitude());
 			friendCard.setFriendLongitude(friend.getLongitude());
 			friendCard.createCard();
@@ -154,6 +164,42 @@ public class FriendsFragment extends Fragment {
 			friendCardListView.setAdapter(friendCardArrayAdapter);
 		}
 
+	}
+
+	private Bitmap getMapImage(User friend) {
+		String latitude = friend.getLatitude();
+		String longitude = friend.getLongitude();
+
+		String url = "http://maps.google.com/maps/api/staticmap?center="
+				+ latitude + "," + longitude
+				+ "&zoom=18&size=800x500&markers=color:blue%7C" + latitude
+				+ "," + longitude + "&zoom=18&sensor=false";
+
+		Bitmap map = getBitmapFromURL(url);
+
+		return map;
+	}
+	
+	public static Bitmap getBitmapFromURL(String src) {
+
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
+		try {
+			URL url = new URL(src);
+			HttpURLConnection connection = (HttpURLConnection) url
+					.openConnection();
+			connection.setDoInput(true);
+			connection.connect();
+			InputStream input = connection.getInputStream();
+			Bitmap myBitmap = BitmapFactory.decodeStream(input);
+			return myBitmap;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private String getCity(String lat, String longi) {
