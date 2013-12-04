@@ -1,5 +1,9 @@
 package com.sharlocstudio.sharloc;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -12,12 +16,15 @@ import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.xmlpull.v1.XmlPullParserException;
+
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 import com.sharlocstudio.sharloc.R;
 import com.sharlocstudio.sharloc.cards.FriendCard;
+import com.sharlocstudio.sharloc.model.Friends;
 import com.sharlocstudio.sharloc.model.User;
 import com.sharlocstudio.sharloc.support.LoadFriendsServerComm;
 
@@ -27,6 +34,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -56,14 +64,14 @@ public class FriendsFragment extends Fragment {
 									// menu sendiri
 
 		friendsFragment = this;
+		new LoadFriendList().execute();
 		return rootView;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		loadFriend();
+		
 	}
 
 	@Override
@@ -126,34 +134,6 @@ public class FriendsFragment extends Fragment {
 			friendCards.add(friendCard);
 		}
 
-		// FriendCard friend1 = new
-		// FriendCard(getActivity().getApplicationContext());
-		// friend1.setCardHeader("Afrishal Priyandhana");
-		// friend1.setCardContent("At Depok, 21 mins ago");
-		// friend1.createCard();
-		// friendCards.add(friend1);
-		//
-		// FriendCard friend2 = new
-		// FriendCard(getActivity().getApplicationContext());
-		// friend2.setCardHeader("Harish Muhammad Nazief");
-		// friend2.setCardContent("At Bogor, just now");
-		// friend2.createCard();
-		// friendCards.add(friend2);
-		//
-		// FriendCard friend3 = new
-		// FriendCard(getActivity().getApplicationContext());
-		// friend3.setCardHeader("Nisrina Rahmah");
-		// friend3.setCardContent("At Cawang, 2 hours ago");
-		// friend3.createCard();
-		// friendCards.add(friend3);
-		//
-		// FriendCard friend4 = new
-		// FriendCard(getActivity().getApplicationContext());
-		// friend4.setCardHeader("Yehezkiel Chrisby Gulo");
-		// friend4.setCardContent("At Cawang, 48 mins ago");
-		// friend4.createCard();
-		// friendCards.add(friend4);
-
 		CardArrayAdapter friendCardArrayAdapter = new CardArrayAdapter(
 				getActivity(), friendCards);
 		friendCardArrayAdapter.setInnerViewTypeCount(1);
@@ -179,7 +159,7 @@ public class FriendsFragment extends Fragment {
 
 		return map;
 	}
-	
+
 	public static Bitmap getBitmapFromURL(String src) {
 
 		if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -283,6 +263,37 @@ public class FriendsFragment extends Fragment {
 			return "Now";
 		}
 
+	}
+
+	private class LoadFriendList extends AsyncTask<Void, Void, ArrayList<User>> {
+
+		@Override
+		protected ArrayList<User> doInBackground(Void... arg0) {
+			ArrayList<User> friendList = null;
+			InputStream is;
+			try {
+				is = new BufferedInputStream(new FileInputStream(new File(
+						getActivity().getFilesDir() + "/" + Friends.FILE_NAME)));
+				friendList = Friends.getFriendList(is);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (XmlPullParserException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return friendList;
+		}
+
+		@Override
+		protected void onPostExecute(ArrayList<User> result) {
+			if (result != null) {
+				initCards(result);
+			}
+			super.onPostExecute(result);
+		}
+		
+		
 	}
 
 }

@@ -43,11 +43,12 @@ public class LoadFriendsServerComm extends
 
 	@Override
 	protected void onPreExecute() {
-
-		progDialog = new ProgressDialog(homeActivity,
-				ProgressDialog.STYLE_HORIZONTAL);
-		progDialog.setMessage("Loading Friend List");
-		progDialog.show();
+		if (friendsFragment != null) {
+			progDialog = new ProgressDialog(homeActivity,
+					ProgressDialog.STYLE_HORIZONTAL);
+			progDialog.setMessage("Loading Friend List");
+			progDialog.show();
+		}
 
 	}
 
@@ -93,22 +94,26 @@ public class LoadFriendsServerComm extends
 													+ Friends.FILE_NAME)));
 							friendList = Friends.getFriendList(is);
 							friendsFragment.initCards(friendList);
+							progDialog.dismiss();
 						}
-						progDialog.dismiss();
 
 					} else {
 						// handle if error
 						Toast.makeText(homeActivity,
 								result.getString("message"), Toast.LENGTH_SHORT)
 								.show();
-						progDialog.dismiss();
+						if (friendsFragment != null) {
+							progDialog.dismiss();
+						}
 					}
 				}
 			} else {
 				Toast.makeText(homeActivity, "Failed to Connect Server",
 						Toast.LENGTH_SHORT).show();
 				Log.e("loadFriend", "json error");
-				progDialog.dismiss();
+				if (friendsFragment != null) {
+					progDialog.dismiss();
+				}
 			}
 		} catch (Exception e) {
 			cancel(true);
