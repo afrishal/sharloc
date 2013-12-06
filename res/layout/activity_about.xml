@@ -38,10 +38,10 @@
     <ImageView
         android:id="@+id/sharloc_about_developer"
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="100dp"
         android:contentDescription="@string/cd_sharloc_about_developer"
-        android:src="@drawable/logo_developer"
+        android:src="@drawable/logo_credits"
         android:visibility="invisible" />
 
 </LinearLayout>

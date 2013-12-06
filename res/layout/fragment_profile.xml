@@ -32,8 +32,7 @@
         android:layout_width="360dp"
         android:layout_height="1dp"
         android:background="#9E9E9E"
-        android:layout_gravity="center"
-        android:text="@string/emailDummy1" />
+        android:layout_gravity="center" />
     
     <TextView
         android:id="@+id/profile_qr_code_title"

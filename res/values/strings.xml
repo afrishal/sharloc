@@ -24,21 +24,24 @@
     <!-- Strings for action menu -->
     <string name="action_settings">Settings</string>
 
-    <!-- Strings for settings activity | KALO SETTINGS DIPENCET -->
+    <!-- Strings for SettingsActivity -->
     <string name="item_help">Help</string>
     <string name="item_about">About</string>
     <string name="item_sign_out">Sign Out</string>
     <string name="sign_out_alert_message">Are you sure?</string>
     <string name="sign_out_alert_title">Logout</string>
+    
+    <string-array name="settings_menu_array">
+        <item>About</item>
+        <item>Sign Out</item>
+    </string-array>
 
-    <!-- String for home fragment -->
+    <!-- Strings for home fragment -->
     <string name="label_current_location">Current Location</string>
     <string name="button_broadcast_location">Broadcast Location</string>
     <string name="action_add_friend">Add Friend</string>
     <string name="action_refresh_friend">Refresh</string>
     <string name="action_edit_profile">Edit Profile</string>
-    <string name="accountDummy1">Yehezkiel Chrisby Gulo</string>
-    <string name="emailDummy1">yehezkiel.chrisby@gmail.com</string>
     <string name="broadcast_direction">Press Broadcast Location to share your location</string>
 
     <!-- Strings for friend fragment -->
@@ -74,13 +77,8 @@
     <string name="login_register_button_label">Create an Account</string>
     <string name="title_activity_locate_on_map">Map</string>
     <string name="title_activity_settings">Settings</string>
-
-    <string-array name="settings_menu_array">
-        <item>About</item>
-        <item>Sign Out</item>
-    </string-array>
     
-    <!-- Strnigs for content descriptions -->
+    <!-- Strings for content descriptions -->
     <string name="cd_sharloc_logo">Logo</string>
     <string name="cd_sharloc_name">Name</string>
     <string name="cd_sharloc_about_logo">Sharloc Logo</string>
@@ -89,7 +87,7 @@
     <string name="cd_sharloc_about_developer">Sharloc Developer</string>
     <string name="cd_maps_bitmap">Map Image</string>
     
-    <!-- String for alert dialog button -->
+    <!-- Strings for alert dialog button -->
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 
