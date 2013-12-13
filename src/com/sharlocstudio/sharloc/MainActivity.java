@@ -91,9 +91,10 @@ public class MainActivity extends FragmentActivity {
 			String email = intent.getStringExtra("email");
 			String longitude = intent.getStringExtra("longitude");
 			String latitude = intent.getStringExtra("latitude");
+			String address = intent.getStringExtra("address");
 			String lastUpdate = intent.getStringExtra("lastUpdate");
 
-			user = new User(email, name, latitude, longitude,
+			user = new User(email, name, latitude, longitude, address,
 					Timestamp.valueOf(lastUpdate));
 			try {
 				user.saveProfile(openFileOutput(User.FILE_NAME,

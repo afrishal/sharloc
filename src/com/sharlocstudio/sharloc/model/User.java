@@ -21,6 +21,7 @@ public class User implements Comparable<User> {
 	private String name;
 	private String latitude;
 	private String longitude;
+	private String address;
 	private Timestamp lastUpdate;
 	public static final String FILE_NAME = "user.xml";
 	
@@ -28,11 +29,12 @@ public class User implements Comparable<User> {
 		
 	}
 	
-	public User(String email, String name, String latitude, String longitude, Timestamp lastUpdate) {
+	public User(String email, String name, String latitude, String longitude, String address, Timestamp lastUpdate) {
 		this.email = email;
 		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.address = address;
 		this.lastUpdate = lastUpdate;
 	}
 	
@@ -50,6 +52,10 @@ public class User implements Comparable<User> {
 	
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	public void setLastUpdate(Timestamp lastUpdate) {
@@ -70,6 +76,10 @@ public class User implements Comparable<User> {
 	
 	public String getLongitude() {
 		return longitude;
+	}
+	
+	public String getAddress() {
+		return address;
 	}
 	
 	public Timestamp getLastUpdate() {

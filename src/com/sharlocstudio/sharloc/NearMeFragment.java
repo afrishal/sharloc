@@ -59,7 +59,7 @@ public class NearMeFragment extends Fragment {
 		try {
 			MapsInitializer.initialize(getActivity());
 		} catch (GooglePlayServicesNotAvailableException e) {
-			
+
 		}
 
 		mMapView = (MapView) rootView.findViewById(R.id.map);
@@ -74,7 +74,7 @@ public class NearMeFragment extends Fragment {
 
 			ArrayList<User> nearestFriend = getNearestFriend(friendList);
 
-			if (nearestFriend != null) {
+			if (nearestFriend.size() > 0) {
 				addMarker(nearestFriend);
 			}
 		}
@@ -113,7 +113,8 @@ public class NearMeFragment extends Fragment {
 			String time = getUpdateTime(nearestFriend.get(i));
 
 			googleMap.addMarker(new MarkerOptions().position(
-					new LatLng(friendLat, friendLong)).title(name + ", " + time));
+					new LatLng(friendLat, friendLong))
+					.title(name + ", " + time));
 		}
 	}
 
@@ -146,7 +147,7 @@ public class NearMeFragment extends Fragment {
 
 		LatLng myLastPosition = new LatLng(location.getLatitude(),
 				location.getLongitude());
-		
+
 		myLat = location.getLatitude();
 		myLong = location.getLongitude();
 
@@ -168,14 +169,14 @@ public class NearMeFragment extends Fragment {
 		try {
 			is = new BufferedInputStream(new FileInputStream(new File(
 					getActivity().getFilesDir() + "/" + Friends.FILE_NAME)));
+			friendList = Friends.getFriendList(is);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
-		}
-		try {
-			friendList = Friends.getFriendList(is);
 		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -186,16 +187,17 @@ public class NearMeFragment extends Fragment {
 		ArrayList<User> nearestFriend = new ArrayList<User>();
 
 		for (int i = 0; i < friendList.size(); i++) {
-			
-			User friend = friendList.get(i);
-			
-			double friendLat = Double.parseDouble(friend.getLatitude());
-			double friendLong = Double.parseDouble(friend.getLongitude());
 
-			float distance = getDistance(myLat, friendLat, myLong, friendLong);
-			
-			if (distance <= 1500) {
-				nearestFriend.add(friend);
+			User friend = friendList.get(i);
+			if (friend.getLatitude().isEmpty() && friend.getLongitude().isEmpty()) {
+				double friendLat = Double.parseDouble(friend.getLatitude());
+				double friendLong = Double.parseDouble(friend.getLongitude());
+				float distance = getDistance(myLat, friendLat, myLong,
+						friendLong);
+
+				if (distance <= 1500) {
+					nearestFriend.add(friend);
+				}
 			}
 
 		}
@@ -206,42 +208,48 @@ public class NearMeFragment extends Fragment {
 			double long2) {
 
 		float[] result = new float[3];
-		
+
 		Location.distanceBetween(lat1, long1, lat2, long2, result);
-		
+
 		return result[0];
-		
+
 	}
-	
+
 	private String getUpdateTime(User user) {
 		Timestamp time = user.getLastUpdate();
 		Timestamp now = new Timestamp(new Date().getTime());
 		long diff = now.getTime() - time.getTime();
 		Log.i("friend time", time.toString());
 		Log.i("user time", now.toString());
-		
+
 		long diffSeconds = diff / 1000 % 60;
 		long diffMinutes = diff / (60 * 1000) % 60;
 		long diffHours = diff / (60 * 60 * 1000) % 24;
 		long diffDays = diff / (24 * 60 * 60 * 1000) % 7;
 		long diffWeeks = diff / (7 * 24 * 60 * 60 * 1000) % 4;
 		long diffMonths = (diff / (7 * 24 * 60 * 1000)) / 30;
-			
+
 		if (diffMonths > 0) {
-			return (diffMonths == 1)?(diffMonths + " Month ago"):(diffMonths + " Months ago");
+			return (diffMonths == 1) ? (diffMonths + " Month ago")
+					: (diffMonths + " Months ago");
 		} else if (diffWeeks > 0) {
-			return (diffWeeks == 1)?(diffWeeks + " Week ago"):(diffWeeks + " Week ago");
+			return (diffWeeks == 1) ? (diffWeeks + " Week ago")
+					: (diffWeeks + " Week ago");
 		} else if (diffDays > 0) {
-			return (diffDays == 1)?(diffDays + " Day ago"):(diffDays + " Days ago");
+			return (diffDays == 1) ? (diffDays + " Day ago")
+					: (diffDays + " Days ago");
 		} else if (diffHours > 0) {
-			return (diffHours == 1)?(diffHours + " Hour ago"):(diffHours + " Hours ago");
+			return (diffHours == 1) ? (diffHours + " Hour ago")
+					: (diffHours + " Hours ago");
 		} else if (diffMinutes > 0) {
-			return (diffMinutes == 1)?(diffMinutes + " Minute ago"):(diffMinutes + " Minutes ago");
+			return (diffMinutes == 1) ? (diffMinutes + " Minute ago")
+					: (diffMinutes + " Minutes ago");
 		} else if (diffSeconds > 0) {
-			return (diffSeconds == 1)?(diffSeconds + " Second ago"):(diffSeconds + " Seconds ago");
+			return (diffSeconds == 1) ? (diffSeconds + " Second ago")
+					: (diffSeconds + " Seconds ago");
 		} else {
 			return "Now";
 		}
-		
+
 	}
 }

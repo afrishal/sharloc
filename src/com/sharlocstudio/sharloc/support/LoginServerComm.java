@@ -68,6 +68,7 @@ public class LoginServerComm extends
 						String email = user.getString("email");
 						String longitude = user.getString("longitude");
 						String latitude = user.getString("latitude");
+						String address = user.getString("address");
 						String lastUpdate = user.getString("last_update");
 						
 						Intent homeIntent = new Intent(loginActivity, MainActivity.class);
@@ -75,6 +76,7 @@ public class LoginServerComm extends
 						homeIntent.putExtra("email", email);
 						homeIntent.putExtra("longitude", longitude);
 						homeIntent.putExtra("latitude", latitude);
+						homeIntent.putExtra("address", address);
 						homeIntent.putExtra("lastUpdate", lastUpdate);
 						loginActivity.startActivity(homeIntent);
 						loginActivity.finish();

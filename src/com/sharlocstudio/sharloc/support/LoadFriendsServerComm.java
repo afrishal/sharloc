@@ -77,9 +77,10 @@ public class LoadFriendsServerComm extends
 							String email = friend.getString("email");
 							String longitude = friend.getString("longitude");
 							String latitude = friend.getString("latitude");
+							String address = friend.getString("address");
 							String lastUpdate = friend.getString("lastUpdate");
 							User user = new User(email, name, latitude,
-									longitude, Timestamp.valueOf(lastUpdate));
+									longitude, address, Timestamp.valueOf(lastUpdate));
 							friendList.add(user);
 							Log.i("friendloop", "friend added");
 						}
@@ -87,16 +88,17 @@ public class LoadFriendsServerComm extends
 						Friends friendManager = new Friends(friendList);
 						friendManager.saveFriends(homeActivity.openFileOutput(
 								Friends.FILE_NAME, Context.MODE_PRIVATE));
+						Log.i("loadfriend","friend saved to xml");
 						if (friendsFragment != null) {
 							InputStream is = new BufferedInputStream(
 									new FileInputStream(new File(
 											homeActivity.getFilesDir() + "/"
 													+ Friends.FILE_NAME)));
 							friendList = Friends.getFriendList(is);
+							Log.i("friendlist","get friendlist");
 							friendsFragment.initCards(friendList);
 							progDialog.dismiss();
 						}
-
 					} else {
 						// handle if error
 						Toast.makeText(homeActivity,

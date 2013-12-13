@@ -52,6 +52,10 @@ public class Friends {
 		    xml.startTag(null, "longitude");
 		    xml.text(user.getLongitude());
 		    xml.endTag(null, "longitude");
+
+		    xml.startTag(null, "address");
+		    xml.text(user.getAddress());
+		    xml.endTag(null, "address");
 		    
 		    xml.startTag(null, "lastUpdate");
 		    xml.text(user.getLastUpdate().toString());
@@ -108,6 +112,8 @@ public class Friends {
 					user.setLatitude(text);
 				} else if (tagname.equalsIgnoreCase("longitude")) {
 					user.setLongitude(text);
+				} else if (tagname.equalsIgnoreCase("address")) {
+					user.setAddress(text);
 				} else if (tagname.equalsIgnoreCase("lastUpdate")) {
 					user.setLastUpdate(Timestamp.valueOf(text));
 				}

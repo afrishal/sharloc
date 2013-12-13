@@ -70,7 +70,6 @@ public class FriendsFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
 	}
 
 	@Override
@@ -123,12 +122,19 @@ public class FriendsFragment extends Fragment {
 			friendCard.setCardHeader(friend.getName());
 			friendCard.setFragment(this);
 			friendCard.setFriendEmail(friend.getEmail());
-			friendCard.setCardContent(getCity(friend.getLatitude(),
-					friend.getLongitude())
-					+ ", " + getUpdateTime(friend));
-			friendCard.setCardImageBitmap(getMapImage(friend)); // SHOW
-			friendCard.setFriendLatitude(friend.getLatitude());
-			friendCard.setFriendLongitude(friend.getLongitude());
+			Log.e("latitude", friend.getLatitude());
+			Log.e("longitude", friend.getLongitude());
+			if (friend.getLongitude().isEmpty() && friend.getLatitude().isEmpty()) {
+				friendCard.setCardContent(getCity(friend.getLatitude(),
+						friend.getLongitude())
+						+ ", " + getUpdateTime(friend));
+				friendCard.setCardImageBitmap(getMapImage(friend)); // SHOW
+				friendCard.setFriendLatitude(friend.getLatitude());
+				friendCard.setFriendLongitude(friend.getLongitude());
+				friendCard.setFriendAddress(friend.getAddress());
+			} else {
+				friendCard.setCardContent("Location Unknown");
+			}
 			friendCard.createCard();
 			friendCards.add(friendCard);
 		}
@@ -291,8 +297,7 @@ public class FriendsFragment extends Fragment {
 			}
 			super.onPostExecute(result);
 		}
-		
-		
+
 	}
 
 }

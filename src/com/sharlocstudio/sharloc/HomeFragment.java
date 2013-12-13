@@ -241,6 +241,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			params.add(new BasicNameValuePair("longitude", String
 					.valueOf(myLong)));
 			params.add(new BasicNameValuePair("latitude", String.valueOf(myLat)));
+			params.add(new BasicNameValuePair("address", list.get(0).getLocality()));
 			broadcast.execute(params);
 
 			break;
