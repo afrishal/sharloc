@@ -124,9 +124,8 @@ public class FriendsFragment extends Fragment {
 			friendCard.setFriendEmail(friend.getEmail());
 			Log.e("latitude", friend.getLatitude());
 			Log.e("longitude", friend.getLongitude());
-			if (friend.getLongitude().isEmpty() && friend.getLatitude().isEmpty()) {
-				friendCard.setCardContent(getCity(friend.getLatitude(),
-						friend.getLongitude())
+			if (!friend.getLongitude().equals("null") && !friend.getLatitude().equals("null")) {
+				friendCard.setCardContent(friend.getAddress()
 						+ ", " + getUpdateTime(friend));
 				friendCard.setCardImageBitmap(getMapImage(friend)); // SHOW
 				friendCard.setFriendLatitude(friend.getLatitude());

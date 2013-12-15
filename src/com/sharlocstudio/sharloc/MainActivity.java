@@ -206,9 +206,9 @@ public class MainActivity extends FragmentActivity {
 				menu.findItem(R.id.action_refresh_friend).setVisible(false);
 			}
 
-			if (menu.findItem(R.id.action_edit_profile) != null) {
-				menu.findItem(R.id.action_edit_profile).setVisible(false);
-			}
+//			if (menu.findItem(R.id.action_edit_profile) != null) {
+//				menu.findItem(R.id.action_edit_profile).setVisible(false);
+//			}
 
 		}
 		return super.onPrepareOptionsMenu(menu);

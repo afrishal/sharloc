@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
 	<!-- Should appear as action button -->
-    <item android:id="@+id/action_edit_profile"
+    <!-- <item android:id="@+id/action_edit_profile"
           android:icon="@drawable/ic_action_content_edit"
           android:title="@string/action_edit_profile"
-          android:showAsAction="ifRoom" />
+          android:showAsAction="ifRoom" /> -->
     
 </menu>
